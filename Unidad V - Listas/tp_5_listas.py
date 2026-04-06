@@ -8,6 +8,9 @@ while True:
             suma = 0
             for i in range(len(alumnos)):
                 suma += alumnos[i]
+            print(f"Lista: {alumnos}")
+            print(f"Nota mas alta: {max(alumnos)}\n"
+            f"Nota mas baja: {min(alumnos)}")
             print(f"El promedio de las notas es:{suma/10}")
         # Ejercicio 2 ---------------------------------------------------    
         case "2":
@@ -100,7 +103,7 @@ while True:
                 sumaMini += matriz[i][1]
                 if matriz[i][0] - matriz[i][1] > mayorAmp:
                     mayorAmp = matriz[i][0] - matriz[i][1]
-                    dia = i = 1
+                    dia = i
             print(f"Promedio maximas = {sumaMax/7:.2f}\nPromedio minimas = {sumaMini/7:.2f}\nCon mayor amplitod el dia {dia}")
         # Ejercicio 8 ---------------------------------------------------
         case "8":
@@ -130,19 +133,31 @@ while True:
                     print("==== TURNO X ====")
                     posiciones = {0,1,2}
                     while True:
-                        posicionF = input("Ingrese fila: ").strip()
-                        if posicionF.isdigit:
-                                posicionF = int(posicionF)
-                                if posicionF in posiciones:
-                                    break
-                    while True:    
-                        posicionC = input("Ingrese columna: ").strip()
-                        if posicionC.isdigit:
-                            posicionC = int(posicionC)
-                            if posicionF in posiciones:
+                        posicionFx = input("Ingrese fila: ").strip()
+                        if posicionFx.isdigit():
+                            posicionFx = int(posicionFx)
+                            if posicionFx in posiciones:
                                 break
-                    tablero[posicionF][posicionC] = "X"
-                    turnoX = False
+                            else:
+                                print("Ingrese posicion valida.")
+                        else:
+                            print("Ingrese posicion valida.")
+                    while True:    
+                        posicionCx = input("Ingrese columna: ").strip()
+                        if posicionCx.isdigit():
+                            posicionCx = int(posicionCx)
+                            if posicionCx in posiciones:
+                                break
+                            else:
+                                print("Ingrese posicion valida.")
+                        else:
+                            print("Ingrese posicion valida.")
+
+                    if tablero[posicionFx][posicionCx] == "-":
+                        tablero[posicionFx][posicionCx] = "X"
+                        turnoX = False
+                    else:
+                        print("Posicion invalida.")
                 for fila in range(len(tablero)):
                     print(tablero[fila])
                 if ["X","X","X"] in tablero:
@@ -151,26 +166,37 @@ while True:
                 elif tablero[0][0] == "X" and tablero[1][1] == "X" and tablero[2][2] == "X":
                     print("Partida finalizada. Gana X.")
                     break
+                elif tablero[0][2] == "X" and tablero[1][1] == "X" and tablero[2][0] == "X":
+                    print("Partida finalizada. Gana X.")
+                    break
                 while not turnoX:
                     print("==== TURNO O ====")
                     posiciones = {0,1,2}
                     while True:
-                        posicionF = input("Ingrese fila: ").strip()
-                        if posicionF.isdigit:
-                                posicionF = int(posicionF)
-                                if posicionF in posiciones:
+                        posicionFo = input("Ingrese fila: ").strip()
+                        if posicionFo.isdigit():
+                                posicionFo = int(posicionFo)
+                                if posicionFo in posiciones:
                                     break
                                 else:
-                                    print("Ingrese numero valido.")
+                                    print("Ingrese posicion valida.")
+                        else:
+                            print("Ingrese posicion valida.")
                     while True:    
-                        posicionC = input("Ingrese columna: ").strip()
-                        if posicionC.isdigit:
-                            posicionC = int(posicionC)
-                            if posicionF in posiciones:
+                        posicionCo = input("Ingrese columna: ").strip()
+                        if posicionCo.isdigit():
+                            posicionCo = int(posicionCo)
+                            if posicionCo in posiciones:
                                 break
                             else:
-                                print("Ingrese numero valido.")
-                    tablero[posicionF][posicionC] = "O"
+                                print("Ingrese posicion valida.")
+                        else:
+                            print("Ingrese posicion valida.")
+                    if tablero[posicionFo][posicionCo] == "-":
+                        tablero[posicionFo][posicionCo] = "O"
+                        turnoX = False
+                    else:
+                        print("Posicion invalida")
                     turnoX = True
                 for fila in range(len(tablero)):
                     print(tablero[fila])
@@ -180,6 +206,10 @@ while True:
                 elif tablero[0][0] == "O" and tablero[1][1] == "O" and tablero[2][2] == "O":
                     print("Partida finalizada. Gana O.")
                     break
+                elif tablero[0][2] == "O" and tablero[1][1] == "O" and tablero[2][0] == "O":
+                    print("Partida finalizada. Gana O.")
+                    break
+                
         # Ejercicio 10 --------------------------------------------------
         case "10":
             productos = [[40,2,3,4,5,6,7], [5,2,3,4,5,6,7], [3,2,3,4,5,6,7], [4,2,3,4,5,6,7]]
@@ -231,29 +261,10 @@ while True:
                         print("Solo numeros.")
             print(f"Lisa original: {lista}")
             
-            n = len(lista)
-            for i in range(n):
-                intercamio = False
-
-                for j in range(0, n-1-i):
-                    if lista[j] > lista[j+1]:
-                        lista[j], lista[j+1] = lista[j+1], lista[j]
-                        intercambio = True
-
-                if not intercambio:
-                    break
+            lista = sorted(lista)
             print(f"Lista de menor a mayor {lista}")
 
-            for i in range(n):
-                intercamio = False
-
-                for j in range(0, n-1-i):
-                    if lista[j] < lista[j+1]:
-                        lista[j], lista[j+1] = lista[j+1], lista[j]
-                        intercambio = True
-
-                if not intercambio:
-                    break
+            lista = sorted(lista, reverse=True)
             print(f"Lista de mayor a menor: {lista}")
         # Ejercicio 13 --------------------------------------------------
         case "13":
