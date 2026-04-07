@@ -1,16 +1,21 @@
 herramientas = ["martillo", "taladro", "llave inglesa", "destornillador", "soplete"]
 existencias = [50, 0, 30, 75, 0]
+contador = 0
 
 running = True
 while running:
     print("Elige opcion:\n"
     "-1- Ingresar HERRAMIENTAS \n"
-    "-2- Visualizar Inventario\n"
-    "-3- Buscar Herramienta\n"
-    "-4- Reporte de Agotados\n"
-    "-5- Alta de Nuevo Producto\n"
-    "-6- Actualizacion de Stock\n"
-    "-7- Salir")
+    "-2- Ingresar CANTIDADES \n"
+    "-3- Visualizar Inventario\n"
+    "-4- Buscar Herramienta\n"
+    "-5- Reporte de Agotados\n"
+    "-6- Alta de Nuevo Producto\n"
+    "-7- Actualizacion de Stock\n"
+    "-8- Salir")
+
+    # USO UN SISTEMA DE MENU QUE CREE ANTERIORMENTE, DONDE EN UN ARRAY DE NUMEROS ESTAN LAS OPCIONES VALIDAS
+    # 
     
     menu = {1, 2, 3, 4, 5, 6, 7}
     while True:
@@ -25,12 +30,16 @@ while running:
 
     match opcion:
         case 1:
+        # EL USUARIO INGRESA CANTIDAD DE HERRAMIENTAS A INGRESAR
+        # SE VALIDA QUE SEA UN NUMERO POSITIVO Y SE LE SUMA ESE VALOR A CONTADOR
+        # POR DEFAULT CONTADOR ES 0
             cantidad = input("Ingrese la cantidad de herramientas a ingresar: ")
 
             while not cantidad.isdigit() or int(cantidad) <0:
                 print("Error: ingrese un número entero positivo.")
                 cantidad = input("Ingrese la cantidad de herramientas a ingresar: ")
             cantidad = int(cantidad)
+            contador += cantidad #SETEO CONTADOR IGUAL A CANTIDAD Y SUMO MAS CANTIDADES SI ESTE NO ES 0
 
             for i in range(cantidad):
                 while True:
@@ -39,19 +48,21 @@ while running:
                         herramientas.append(herramienta.lower())
                         break
 
-            for h in range(len(herramientas)):
+        case 2:
+            for h in range(len(herramientas), len(herramientas) + contador):
                 existenciasH = input(f"Ingrese la cantidad para {herramientas[h]}: ")
 
                 while not existenciasH.isdigit() or int(existenciasH) <0:
                     existenciasH = input(f"Ingrese la cantidad para {herramientas[h]}: ")
                 existencias.append(int(existenciasH))
+            contador = 0 #UNA VEZ INGRESADA LA CANTIDAD DE EXISTENCIAS DE CADA NUEVA HERRAMIENTA CONTADOR = 0
 
-        case 2:
+        case 3:
             print(f"=== INVENTARIO ===")
             for i in range(len(herramientas)):
                 print(f"{herramientas[i]}: {existencias[i]}")
 
-        case 3:
+        case 4:
             while True:
                 buscar = input("Ingrese el nombre de la herramienta: ").strip()
                 if buscar.replace(" ", "").isalpha() and buscar != "":
@@ -63,13 +74,13 @@ while running:
             else:
                 print("No se encontro la herramienta en el catalogo.")
 
-        case 4:
+        case 5:
             print("Sin existencias: ")
             for i in range(len(existencias)):
                 if existencias[i] == 0:
                     print(herramientas[i])
 
-        case 5:
+        case 6:
             herramienta = input("Ingrese el nombre de la herramienta: ").strip()
             if not herramienta.replace(" ", "").isalpha() or herramienta.lower() in herramientas or herramienta == "":                   
                 continue
@@ -81,7 +92,7 @@ while running:
             herramientas.append(herramienta.lower())
             existencias.append(int(existenciasH))
 
-        case 6:
+        case 7:
             while True:
                 herramienta = input("Ingrese el nombre de la herramienta: ").strip()
                 if herramienta.replace(" ", "").isalpha() and herramienta != "":
@@ -127,7 +138,7 @@ while running:
                             break
                     
 
-        case 7:
+        case 8:
             print("Terminando programa...")
             break
 
