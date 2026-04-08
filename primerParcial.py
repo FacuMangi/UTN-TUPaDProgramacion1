@@ -17,7 +17,7 @@ while running:
     # USO UN SISTEMA DE MENU QUE CREE ANTERIORMENTE, DONDE EN UN ARRAY DE NUMEROS ESTAN LAS OPCIONES VALIDAS
     # ESTE VALIDA QUE LA OPCION SEA UN NUMERO Y QUE ESTE ESTE EN EL ARRAY
     
-    menu = {1, 2, 3, 4, 5, 6, 7}
+    menu = {1, 2, 3, 4, 5, 6, 7, 8}
     while True:
         opcion = input("Opcion: ").strip()
         if opcion.lstrip("+-").isdigit():
