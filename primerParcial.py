@@ -70,6 +70,9 @@ while running:
         case 3:
             # EL FOR RECORRE UN RANGO IGUAL A LA CANTIDAD DE ELEMENTOS EN EXISTENCIAS
             # ESTO ES ASI PARA QUE SI SE ESTAN INGRESANDO HERRAMIENTAS PERO AUN NO SE INGRESARON LAS CANTIDADES, NO SALTE UN ERROR A LA HORA DE RECORRER AMBOS ARRAYS
+            if len(herramientas) == 0:
+                print("No hay herramientas cargadas.")
+                continue
             print(f"=== INVENTARIO ===")
             for i in range(len(existencias)):
                 print(f"-- {herramientas[i]}: {existencias[i]}")
