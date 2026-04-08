@@ -1,5 +1,5 @@
-herramientas = ["martillo", "taladro", "llave inglesa", "destornillador", "soplete"]
-existencias = [50, 0, 30, 75, 0]
+herramientas = []
+existencias = []
 contador = 0
 
 running = True
