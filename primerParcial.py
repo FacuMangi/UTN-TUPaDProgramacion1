@@ -52,8 +52,8 @@ while running:
         case 2:
         # PARA INGRESAR LAS EXISTENCIAS SE ITERA SOBRE LA LISTA DE HERRAMIENTAS
         # UN FOR EMPIEZA RECORRIENDO DESDE:
-        #   EL ULTIMO ELEMENTO HACIA ATRAS UNA CANTIDAD {CONTADOR} DE VECES (ESTO SERIA DESDE EL PRIMER LUGAR DE LAS NUEVAS HERRAMIENTAS INGRESADAS)
-        #   HASTA EL ULTIMO ELEMENTO DE HERRAMIENTAS + 1 (PORQUE LA FUNCION RANGE SOLO VA HASTA EL NUMERO ANTERIOR AL FINAL) (ESTO SERIA HASTA EL ULTIMO LUGAR DE LAS HERRAMIENTAS INGRESADAS)
+        # EL ULTIMO ELEMENTO HACIA ATRAS UNA CANTIDAD {CONTADOR} DE VECES (ESTO SERIA DESDE EL PRIMER LUGAR DE LAS NUEVAS HERRAMIENTAS INGRESADAS)
+        # HASTA EL ULTIMO ELEMENTO DE HERRAMIENTAS + 1 (PORQUE LA FUNCION RANGE SOLO VA HASTA EL NUMERO ANTERIOR AL FINAL) (ESTO SERIA HASTA EL ULTIMO LUGAR DE LAS HERRAMIENTAS INGRESADAS)
         # ESTO ES PARA MANTENER COHERENCIA ENTRE LA LISTA HERRAMIENTAS Y LA LISTA EXISTENCIAS
             for h in range(herramientas.index(herramientas[-contador]), herramientas.index(herramientas[-1])+1):
                 existenciasH = input(f"Ingrese la cantidad para {herramientas[h]}: ")
@@ -72,16 +72,20 @@ while running:
                 print(f"-- {herramientas[i]}: {existencias[i]}")
 
         case 4:
-            # 
+            # EL USUARIO INGRESA EL NOMBRE DE LA HERRAMIENTA A BUSCAR
             while True:
                 buscar = input("Ingrese el nombre de la herramienta: ").strip()
+                # SE VALIDA EL INPUT
                 if buscar.replace(" ", "").isalpha() and buscar != "":
                     buscar = buscar.lower()
                     break
+            # VERIFICA QUE LA HERRAMIENTA ESTE EN HERRAMIENTAS
             if buscar in herramientas:
+                # SI ESTA, SACO EL INDEX DE ESA HERRAMIENTA EN HERRAMIENTAS
                 indice = herramientas.index(buscar)
-                #PARA ASEGURAR QUE LA VALIDACION ESTE BIEN HECHA TENGO QUE FIJARME DE QUE INDICE TOMA. SI HAY COSAS REPETIDAS EN LA LISTA, CUANDO BUSQUE INDEX DE ESO ME VA A DEVOLVER LA PRIMER COINCIDENCIA.
-                if existencias.index(existencias[-1]) >= indice:
+                # PARA ASEGURAR QUE LA VALIDACION ESTE BIEN HECHA TENGO QUE FIJARME DE QUE INDICE TOMA. SI HAY COSAS REPETIDAS EN LA LISTA, CUANDO BUSQUE INDEX DE ESO ME VA A DEVOLVER LA PRIMER COINCIDENCIA.
+                # LA VALIDACION DE QUE LA HERRAMIENTA TENGA EXISTENCIAS ES QUE SU INDICE SEA MENOR QUE LA CANTIDAD DE INDICES QUE TENGA EXISTENCIAS (USANDO LEN Y RESTANDO 1)
+                if len(existencias)-1 >= indice:
                     print(f"{herramientas[indice]}: {existencias[indice]}")
                 else:
                     print(f'No hay existencias cargadas para "{buscar}"')
@@ -89,13 +93,16 @@ while running:
                 print("No se encontro la herramienta en el catalogo.")
 
         case 5:
+            # LOOPEO SOBRE LA LISTA EXISTENCIAS Y SI EL VALOR ES 0 IMPRIME LA HERRAMIETNTA CORRESPONDIENTE AL INDICE DE ESA EXISTENCIA CON VALOR 0
             print("Sin existencias: ")
             for i in range(len(existencias)):
                 if existencias[i] == 0:
                     print(herramientas[i])
 
         case 6:
+            # EL USUARIO INGRESA EL NOMBRE DE LA HERRAMIENTA A AGREGAR
             herramienta = input("Ingrese el nombre de la herramienta: ").strip()
+            # SE VALIDA EL INPUT, QUE NO TENGA NUMEROS, QUE NO ESTE EN HERRAMIENTAS Y QUE NO SEA UN VACIO
             if not herramienta.replace(" ", "").isalpha() or herramienta.lower() in herramientas or herramienta == "":                   
                 continue
                         
