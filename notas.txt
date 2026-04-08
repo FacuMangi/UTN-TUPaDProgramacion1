@@ -1,0 +1,24 @@
+"martillo", "taladro", "llave inglesa", "destornillador", "soplete"
+50, 0, 30, 75, 0
+
+Opcion 1:
+    solo se validan los inputs y si la herramienta ingresada no esta en la lista, se agrega.
+
+opcion 2:
+    El control que se hace para mantener coherencia entre las listas ocurre mediante la variable contador. EL orden logico seria: El usuario primero ingresa las herramientas nuevas desde la opcion 1 junto con el numero de herramientas a ingresar. Ese numero se guarda en CONTADOR y luego se usa de referencia en la opcion dos. 
+    Lo que se hace alli es un loop for que se ejecuta una cantidad de veces igual a CONTADOR, partiendo desde HERRAMIENTAS[-contador] hasta el ultimo elemento de HERRAMIENTAS incluido (herramientas[-1] + 1) (o sea, la cantidad de ejecuciones seria igual a los nuevos elementos ingresados a HERRAMIENTAS) se ingresan los numeros de stock a EXISTENCIAS
+
+opcion 3:
+    Iterando sobre la cantidad de elementos en EXISTENCIAS se muestran solo las herramientas que posean numero de stock.
+
+opcion 4:
+    Usuario ingresa herramienta para buscar. Esta se valida y si esta en HERRAMIENTAS se busca su indice. Luego se verifica si su indice en HERRAMIENTAS es mayor a len(existencias) - 1 para validar que esta herramienta posea stock, de no ser asi muestra un mensaje.  
+
+opcion 5:
+    Se hace un loop FOR sobre EXISTENCIAS y si el elemento en EXISTENCIAS es = 0, se imprime la herramienta correspondiente a ese indice.
+
+opcion 6:
+    El usuario ingresa una herramienta, se valida que esta no este en HERRAMIENTAS. De ser asi sale del case 6. Luego se valida el stock, si no cumple sale del case 6.
+
+opcion 7:
+    se ingresa la herramienta para cambiar el stock. Se valida que este en HERRAMIENTAS y se busca el index de esta. Se crea otro menu con dos cases. Para agregar solamente se valida que sea numero positivo o cero y se suma al valor de EXISTENCIAS[index]. Para restar, lo primero es validar que el valor en EXISTENCIAS[index] no sea 0. Luego el usuario ingresa el numero, este se valida y se hace una ultima verificacion. Si EXISTENCIAS[index] es menor al numero ingresado se imprime un mensaje y sale. Sino, se resta el numero al valor de EXISTENCIAS[index] y termina.
