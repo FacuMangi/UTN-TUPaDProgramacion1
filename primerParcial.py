@@ -120,6 +120,9 @@ while running:
             existencias.append(int(existenciasH))
 
         case 7:
+            if len(herramientas) == 0:
+                print("No hay herramientas cargadas.")
+                continue
             while True:
                 herramienta = input("Ingrese el nombre de la herramienta: ").strip()
                 if herramienta.replace(" ", "").isalpha() and herramienta != "":
