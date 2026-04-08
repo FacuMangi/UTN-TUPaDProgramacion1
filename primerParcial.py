@@ -55,14 +55,17 @@ while running:
         # EL ULTIMO ELEMENTO HACIA ATRAS UNA CANTIDAD {CONTADOR} DE VECES (ESTO SERIA DESDE EL PRIMER LUGAR DE LAS NUEVAS HERRAMIENTAS INGRESADAS)
         # HASTA EL ULTIMO ELEMENTO DE HERRAMIENTAS + 1 (PORQUE LA FUNCION RANGE SOLO VA HASTA EL NUMERO ANTERIOR AL FINAL) (ESTO SERIA HASTA EL ULTIMO LUGAR DE LAS HERRAMIENTAS INGRESADAS)
         # ESTO ES PARA MANTENER COHERENCIA ENTRE LA LISTA HERRAMIENTAS Y LA LISTA EXISTENCIAS
-            for h in range(herramientas.index(herramientas[-contador]), herramientas.index(herramientas[-1])+1):
-                existenciasH = input(f"Ingrese la cantidad para {herramientas[h]}: ")
-
-                while not existenciasH.isdigit() or int(existenciasH) <0:
+            if contador > 0:
+                for h in range(herramientas.index(herramientas[-contador]), herramientas.index(herramientas[-1])+1):
                     existenciasH = input(f"Ingrese la cantidad para {herramientas[h]}: ")
-                existencias.append(int(existenciasH))
-            # UNA VEZ INGRESADA LA CANTIDAD DE EXISTENCIAS DE CADA NUEVA HERRAMIENTA CONTADOR = 0
-            contador = 0 
+
+                    while not existenciasH.isdigit() or int(existenciasH) < 0:
+                        existenciasH = input(f"Ingrese la cantidad para {herramientas[h]}: ")
+                    existencias.append(int(existenciasH))
+                # UNA VEZ INGRESADA LA CANTIDAD DE EXISTENCIAS DE CADA NUEVA HERRAMIENTA CONTADOR = 0
+                contador = 0
+            else:
+                print ("No hay herramientas cargadas.") 
 
         case 3:
             # EL FOR RECORRE UN RANGO IGUAL A LA CANTIDAD DE ELEMENTOS EN EXISTENCIAS
@@ -107,7 +110,7 @@ while running:
                 continue
                         
             existenciasH = input(f"Ingrese la cantidad para {herramienta}: ")
-            if not existenciasH.isdigit() or int(existenciasH) <0:
+            if not existenciasH.isdigit() or int(existenciasH) < 0:
                 continue
 
             herramientas.append(herramienta.lower())
@@ -121,11 +124,12 @@ while running:
                     if herramienta.lower() not in herramientas:
                         print("La herramienta no esta en el catalogo.")
                         break 
-
+                    # INICIALIZO VARIABLE INDEX COMO EL INDEX DE LA HERRAMIENTA
                     index = herramientas.index(herramienta)
                     menu = {1, 2}
                     print("-1- Agregar stock\n"
                           "-2- Restar stock")
+                    # VERIFICACION DE INPUT SOLO OPCIONES VALIDAS 
                     while True:
                         opcion = input("Opcion: ").strip()
                         if opcion.lstrip("+-").isdigit():
@@ -136,14 +140,17 @@ while running:
                         else:
                             print("Error: ingrese un número válido.")
                     match opcion:
+                        # SE INICIALIZA Y SE VALIDA (QUE SEA NUMERO Y POSITIVO O CERO) EL NUMERO PARA SUMAR A EXISTENCIAS DE LA HERRAMIENTA
                         case 1:
                             existenciasH = input(f"Ingrese la cantidad a sumar para {herramienta}: ")
                             while not existenciasH.isdigit() or int(existenciasH) < 0:
                                 print("Solo numeros postivios.")
                                 existenciasH = input(f"Ingrese la cantidad a sumar para {herramienta}: ")
+                            # A EXISTENCIA CON INDEX IGUAL A HERRAMIENTA SE LE SUMA EL NUMERO
                             existencias[index] += (int(existenciasH))
                             break
                         case 2:
+                            # ANTES DE PREGUNTAR SE VERIFICA QUE EXISTENCIA DE HERRAMIENTA NO SEA 0
                             if existencias[index] == 0:
                                 print(f"No hay suficientes existencias de {herramienta}.")
                                 break
@@ -152,13 +159,14 @@ while running:
                             while not existenciasH.isdigit() or int(existenciasH) < 0:
                                 print("Solo numeros postivios.")
                                 existenciasH = input(f"Ingrese la cantidad a restar para {herramienta}: ")
+                            # SI EXISTENCIA DE HERRAMIENTA ES MENOR AL INPUT RESTA DA MENOS QUE 0 Y NO SE PERMITE
                             if existencias[index] < int(existenciasH):
                                 print(f"No hay suficientes existencias de {herramienta}.")
                                 break
+                            # A EXISTENCIA CON INDEX IGUAL A HERRAMIENTA SE LE RESTA EL NUMERO
                             existencias[index] -= (int(existenciasH))
                             break
                     
-
         case 8:
             print("Terminando programa...")
             break
