@@ -29,6 +29,7 @@ while running:
             print("Error: ingrese un número válido.")
 
     match opcion:
+        #CARGA INICIAL DE HERRAMIENTAS
         case 1:
         # EL USUARIO INGRESA CANTIDAD DE HERRAMIENTAS A INGRESAR
         # SE VALIDA QUE SEA UN NUMERO POSITIVO Y SE LE SUMA ESE VALOR A CONTADOR
@@ -48,7 +49,7 @@ while running:
                     if herramienta.replace(" ", "").isalpha() and herramienta.lower() not in herramientas and herramienta != "":
                         herramientas.append(herramienta.lower())
                         break
-
+        #CARGA DE EXISTENCIAS
         case 2:
         # PARA INGRESAR LAS EXISTENCIAS SE ITERA SOBRE LA LISTA DE HERRAMIENTAS
         # UN FOR EMPIEZA RECORRIENDO DESDE:
@@ -66,7 +67,7 @@ while running:
                 contador = 0
             else:
                 print ("No hay herramientas cargadas.") 
-
+        #VISUALIZACION DE INVENTARIO
         case 3:
             # EL FOR RECORRE UN RANGO IGUAL A LA CANTIDAD DE ELEMENTOS EN EXISTENCIAS
             # ESTO ES ASI PARA QUE SI SE ESTAN INGRESANDO HERRAMIENTAS PERO AUN NO SE INGRESARON LAS CANTIDADES, NO SALTE UN ERROR A LA HORA DE RECORRER AMBOS ARRAYS
@@ -76,7 +77,7 @@ while running:
             print(f"=== INVENTARIO ===")
             for i in range(len(existencias)):
                 print(f"-- {herramientas[i]}: {existencias[i]}")
-
+        #CONSULTA DE STOCK
         case 4:
             # EL USUARIO INGRESA EL NOMBRE DE LA HERRAMIENTA A BUSCAR
             while True:
@@ -97,14 +98,14 @@ while running:
                     print(f'No hay existencias cargadas para "{buscar}"')
             else:
                 print("No se encontro la herramienta en el catalogo.")
-
+        #REPORTE DE AGOTADOS
         case 5:
             # LOOPEO SOBRE LA LISTA EXISTENCIAS Y SI EL VALOR ES 0 IMPRIME LA HERRAMIETNTA CORRESPONDIENTE AL INDICE DE ESA EXISTENCIA CON VALOR 0
             print("Sin existencias: ")
             for i in range(len(existencias)):
                 if existencias[i] == 0:
                     print(herramientas[i])
-
+        #ALTA DE NUEVO PRODUCTO
         case 6:
             # EL USUARIO INGRESA EL NOMBRE DE LA HERRAMIENTA A AGREGAR
             herramienta = input("Ingrese el nombre de la herramienta: ").strip()
@@ -118,7 +119,7 @@ while running:
 
             herramientas.append(herramienta.lower())
             existencias.append(int(existenciasH))
-
+        #ACTUALIZACION DE STOCK
         case 7:
             if len(herramientas) == 0:
                 print("No hay herramientas cargadas.")
