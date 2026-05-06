@@ -1,29 +1,6 @@
-
-
 Conversión de Números:
 Desarrollen un programa que convierta números decimales a binarios y, de forma opcional, también de binario a decimal.
 Extensión: Validar la entrada y mostrar mensajes de error ante datos incorrectos.
-
-Contador Binario:
-Escriban un programa que, usando un ciclo, cuente desde 0 hasta 15 y muestre cada número en su representación binaria.
-Extensión: Utilicen un retardo para simular el conteo de un circuito.
-
-Generador de Tabla de Verdad:
-Cree un programa que genere la tabla de verdad para una expresión booleana sencilla, como "A AND B".
-Extensión: Permitan al usuario elegir entre distintas operaciones lógicas.
-
-Simulador de Sumador de 1 Bit:
-Programen un sumador simple que utilice lógica booleana para sumar dos dígitos binarios, mostrando tanto el bit de suma como el "carry" (acarreo).
-
-Juego de Adivinanza en Binario:
-Muestren un número en binario y desafíen al usuario a adivinar su equivalente decimal, o viceversa, reforzando la conversión entre ambos sistemas.
-
-Generador de Tablas para Doble Implicación
-Programen un generador que tome dos proposiciones p y q y construya la tabla de verdad completa de p⇔q (p “si y solo si” q), destacando las filas en que el resultado es verdadero.
-Extensión: Incluyan un mensaje que indique si p y q son equivalentes lógicas (p≡q).
-
-Clasificador de Proposiciones Compuestas
-Permitan al usuario ingresar una proposición compuesta (por ejemplo, p∨¬p, p∧¬p o p⇒q). El programa debe generar la tabla de verdad y clasificarla como tautología, contradicción o contingencia según corresponda.
 
 Gemini:
 -- Para tener un ejemplo claro y bien hecho del proceso y tener una secuencia de la cual escribir codigo --
@@ -38,3 +15,6 @@ Por ahora es solo la primera parte. Quiero que analices si la secuencia funciona
 Dame ideas para sumar 1 al resultado invertido. Fijate que ya estoy haciendo el complemento a 1 guardando el resultado en complementoUno
 
 -- Le pedi que me ayude a testearlo, me creo un archivo con una version hecha por el y comparo resultados --
+
+NotebookLM:
+-- Lo use como guia para comparar resultados de mi algoritmo con resultados dados por la ia fomentados por la teoria dada por la materia. De esta manera no me sali de los metodos brindados por la misma y segui los mismos procedimientos. --

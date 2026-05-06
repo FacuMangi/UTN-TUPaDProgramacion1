@@ -8,7 +8,7 @@
 # cocienteNegativo = abs(-235)
 # print(cocienteNegativo)
 
-cociente = -72
+cociente = -10
 
 base = 2
 
@@ -37,6 +37,7 @@ if len(numero) % 8 != 0:
 
 print(f"Numero en base 2: {numero[::-1]}")
 
+palabra = len(numero)
 nBinario = numero[::-1]
 
 for i in range(len(nBinario)):
@@ -59,6 +60,6 @@ for i in range(len(complementoUno)-1, -1, -1):
         complementoUno[i] = 1
         break
     
-print(complementoUno)
+print(f"El numero en base 2 es: {complementoUno} en un sistema de {palabra} bits")
 
 # El loop recorre de derecha a izquierda cambiando todos los 1 por 0. Cuando se encuentra un 0, cambia este a 1 y se corta el loop. Esto es porque se usa el carry y a partir de ahi es lo mismo que ir sumando cero. O sea, no cambia el numero.
