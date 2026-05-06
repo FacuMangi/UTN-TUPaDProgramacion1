@@ -91,20 +91,20 @@ elif cociente < 0:
         elif nBinario[i] == 1:
             nBinario[i] = 0
 
-    complementoUno = nBinario
-    print(f"Complemento 1: {complementoUno}")
+    complemento = nBinario
+    print(f"Complemento 1: {complemento}")
 
-    # Recorro el complementoUno desde la derecha a la izquierda
+    # Recorro el complemento desde la derecha a la izquierda
     # El loop recorre de derecha a izquierda cambiando todos los 1 por 0. Cuando se encuentra un 0, cambia este a 1 y se corta el loop. Esto es porque se usa el carry y a partir de ahi es lo mismo que ir sumando cero. O sea, no cambia el numero.
-    for i in range(len(complementoUno)-1, -1, -1):
-        if complementoUno[i] == 1:
-            complementoUno[i] = 0
+    for i in range(len(complemento)-1, -1, -1):
+        if complemento[i] == 1:
+            complemento[i] = 0
             if i == 0:
-                complementoUno.insert(0, 1)
+                complemento.insert(0, 1)
             continue
-        if complementoUno[i] == 0:
-            complementoUno[i] = 1
+        if complemento[i] == 0:
+            complemento[i] = 1
             break
     
-    print(f"El numero en base 2 es: {complementoUno} en un sistema de {palabra} bits")
+    print(f"El numero en base 2 es: {complemento} en un sistema de {palabra} bits")
 
