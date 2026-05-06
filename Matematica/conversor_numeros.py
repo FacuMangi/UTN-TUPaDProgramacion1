@@ -1,5 +1,12 @@
 # Se pide por consola el numero al usuario
-cociente = int(input("Ingrese numero en base 10 para convertir a base 2: "))
+while True:
+        cociente = input("Ingrese numero en base 10 para convertir a base 2: ").strip()
+        if cociente.lstrip("+-").isdigit():
+            cociente = int(cociente)
+            break
+        else:
+            print("Error: ingrese un número válido.")
+
 
 base = 2
 
@@ -88,6 +95,7 @@ elif cociente < 0:
     print(f"Complemento 1: {complementoUno}")
 
     # Recorro el complementoUno desde la derecha a la izquierda
+    # El loop recorre de derecha a izquierda cambiando todos los 1 por 0. Cuando se encuentra un 0, cambia este a 1 y se corta el loop. Esto es porque se usa el carry y a partir de ahi es lo mismo que ir sumando cero. O sea, no cambia el numero.
     for i in range(len(complementoUno)-1, -1, -1):
         if complementoUno[i] == 1:
             complementoUno[i] = 0
@@ -97,8 +105,6 @@ elif cociente < 0:
         if complementoUno[i] == 0:
             complementoUno[i] = 1
             break
-        
+    
     print(f"El numero en base 2 es: {complementoUno} en un sistema de {palabra} bits")
-
-    # El loop recorre de derecha a izquierda cambiando todos los 1 por 0. Cuando se encuentra un 0, cambia este a 1 y se corta el loop. Esto es porque se usa el carry y a partir de ahi es lo mismo que ir sumando cero. O sea, no cambia el numero.
 
