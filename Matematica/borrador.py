@@ -8,15 +8,15 @@
 # cocienteNegativo = abs(-235)
 # print(cocienteNegativo)
 
-cociente = 89
+cociente = -72
 
 base = 2
 
 numero = []
 
 while True:
-    print(f"cociente: {abs(cociente)}")
-    print(f"Resto: {abs(cociente) % base}")
+    #print(f"cociente: {abs(cociente)}")
+    #print(f"Resto: {abs(cociente) % base}")
     # Agrego el resto al numero
     numero.append(abs(cociente) % base)
     # Redefino cociente como la division entera 
@@ -48,9 +48,17 @@ for i in range(len(nBinario)):
 complementoUno = nBinario
 print(f"Complemento 1: {complementoUno}")
 
-carry = 1
-
 # Recorro el complementoUno desde la derecha a la izquierda
 for i in range(len(complementoUno)-1, -1, -1):
+    if complementoUno[i] == 1:
+        complementoUno[i] = 0
+        if i == 0:
+            complementoUno.insert(0, 1)
+        continue
+    if complementoUno[i] == 0:
+        complementoUno[i] = 1
+        break
     
+print(complementoUno)
 
+# El loop recorre de derecha a izquierda cambiando todos los 1 por 0. Cuando se encuentra un 0, cambia este a 1 y se corta el loop. Esto es porque se usa el carry y a partir de ahi es lo mismo que ir sumando cero. O sea, no cambia el numero.

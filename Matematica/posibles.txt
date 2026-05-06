@@ -36,3 +36,5 @@ Por ahora es solo la primera parte. Quiero que analices si la secuencia funciona
 
 -- Como estaba un poco atorado para hacer la suma en el proceso de transformar numeros negativos le pedi ideas a Copilot --
 Dame ideas para sumar 1 al resultado invertido. Fijate que ya estoy haciendo el complemento a 1 guardando el resultado en complementoUno
+
+-- Le pedi que me ayude a testearlo, me creo un archivo con una version hecha por el y comparo resultados --
