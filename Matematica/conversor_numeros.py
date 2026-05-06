@@ -8,10 +8,18 @@ while True:
             print("Error: ingrese un número válido.")
 
 
+
 base = 2
 
 # Condicional para caso normal
 if cociente >= 0:
+    if 127 < cociente <= 32767:
+        palabra = 16
+    elif cociente > 32767:
+        palabra = 32
+        print(palabra)
+    else:
+        palabra = 8
     numero = []
 
     while True:
@@ -33,27 +41,31 @@ if cociente >= 0:
         # Cuando el cociente llegue a 1 agrego un 1 extra, que es lo que se hace al final del proceso.
         if cociente == 1:
             numero.append(1)
-            numero.append(0)
             break
 
-    # Loop while que agrega ceros al array hasta que la cantidad de bits sea multiplo de 8
-    if len(numero) % 8 != 0:
-        while len(numero) % 8 != 0:
+    # Loop while que agrega ceros al array hasta que la cantidad de bits sea igual a palabra
+    if len(numero) < palabra:
+        while len(numero) < palabra:
             numero.append(0)
-            # Si la cantidad de bits en el array es multiplo de 8 Break
-            if len(numero) % 8 == 0:
-                break    
+            # Si la cantidad de bits en el array es igual a palabra break
+            if len(numero) == palabra:
+                break  
 
-    palabra = len(numero)
+    bits = len(numero)
     nBinario = numero[::-1]
     
     # Se imprime por pantalla el array invertido, con el bit menos significativo puesto al final.
-    print(f"El numero en base 2 es: {nBinario} en un sistema de {palabra} bits")
+    print(f"El numero en base 2 es: {nBinario} en un sistema de {bits} bits")
 
 # Condicional para numeros negativos
 elif cociente < 0:
-
-    base = 2
+    if -32768 <= cociente < -128:
+        palabra = 16
+    elif cociente < -32768:
+        palabra = 32
+        print(palabra)
+    else:
+        palabra = 8
 
     numero = []
     while True:
@@ -72,19 +84,18 @@ elif cociente < 0:
             numero.append(1)
             break
 
-    # Loop while que agrega ceros al array hasta que la cantidad de bits sea multiplo de 8
-    if len(numero) % 8 != 0:
-        while len(numero) % 8 != 0:
+    # Loop while que agrega ceros al array hasta que la cantidad de bits sea igual a palabra
+    if len(numero) < palabra:
+        while len(numero) < palabra:
             numero.append(0)
-            # Si la cantidad de bits en el array es multiplo de 8 Break
-            if len(numero) % 8 == 0:
+            # Si la cantidad de bits en el array es igual a palabra break
+            if len(numero) == palabra:
                 break
 
-    print(f"Numero en base 2: {numero[::-1]}")
-
-    palabra = len(numero)
+    bits = len(numero)
     nBinario = numero[::-1]
 
+    # Calcula complemento 1
     for i in range(len(nBinario)):
         if nBinario[i] == 0:
             nBinario[i] = 1
@@ -92,7 +103,6 @@ elif cociente < 0:
             nBinario[i] = 0
 
     complemento = nBinario
-    print(f"Complemento 1: {complemento}")
 
     # Recorro el complemento desde la derecha a la izquierda
     # El loop recorre de derecha a izquierda cambiando todos los 1 por 0. Cuando se encuentra un 0, cambia este a 1 y se corta el loop. Esto es porque se usa el carry y a partir de ahi es lo mismo que ir sumando cero. O sea, no cambia el numero.
@@ -106,5 +116,5 @@ elif cociente < 0:
             complemento[i] = 1
             break
     
-    print(f"El numero en base 2 es: {complemento} en un sistema de {palabra} bits")
+    print(f"El numero en base 2 es: {complemento} en un sistema de {bits} bits")
 
