@@ -33,7 +33,8 @@ while running:
 
             nBase2 = []
             for i in range(len(stringBase2)):
-                if int(stringBase2[i]) != 1 or int(stringBase2[i]) != 0:
+                print(stringBase2[i])
+                if int(stringBase2[i]) != 1 and int(stringBase2[i]) != 0:
                     noBinario = True
                     break
                 nBase2.append(int(stringBase2[i]))
