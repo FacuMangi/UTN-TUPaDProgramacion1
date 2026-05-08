@@ -29,9 +29,18 @@ while running:
                 else:
                     print("Error: ingrese un número válido.")
 
+            noBinario = False
+
             nBase2 = []
             for i in range(len(stringBase2)):
+                if int(stringBase2[i]) != 1 or int(stringBase2[i]) != 0:
+                    noBinario = True
+                    break
                 nBase2.append(int(stringBase2[i]))
+            
+            if noBinario:
+                print("El numero ingresado no es de base 2.")
+                break
 
             nBase2Inv = nBase2[::-1]
             numero = 0
