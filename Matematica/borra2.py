@@ -1,16 +1,40 @@
-complementoUno = [1,1,1]
-# Recorro el complementoUno desde la derecha a la izquierda
-for i in range(len(complementoUno)-1, -1, -1):
-    # Cuando se le suma 1 al bit del complemento 1, se le resta 1 al carry
-    if complementoUno[i] == 1:
-        complementoUno[i] = 0
-        if i == 0:
-            complementoUno.insert(0, 1)
-        continue
-    if complementoUno[i] == 0:
-        complementoUno[i] = 1
-        break
-    
-print(complementoUno)
+running = True
+while running:
+    print("Elige opcion:\n"
+    "-1- Convertir de base 2 a base 10 \n"
+    "-2- Convertir de base 10 a base 2 \n"
+    "-3- Salir")
 
-# El loop recorre de derecha a izquierda cambiando todos los 1 por 0. Cuando se encuentra un 0, cambia este a 1 y se corta el loop. Esto es porque se usa el carry y a partir de ahi es lo mismo que ir sumando cero. O sea, no cambia el numero.
+    # USO UN SISTEMA DE MENU QUE CREE ANTERIORMENTE, DONDE EN UN ARRAY DE NUMEROS ESTAN LAS OPCIONES VALIDAS
+    # ESTE VALIDA QUE LA OPCION SEA UN NUMERO Y QUE ESTE ESTE EN EL ARRAY
+    
+    menu = {1, 2, 3}
+    while True:
+        opcion = input("Opcion: ").strip()
+        if opcion.lstrip("+-").isdigit():
+            opcion = int(opcion)
+            if opcion in menu:
+                break
+            print("Error: opcion fuera de rango.")
+        else:
+            print("Error: ingrese un número válido.")
+
+    match opcion:
+        #CARGA INICIAL DE HERRAMIENTAS
+        case 1:
+            while True:
+                stringBase2 = input("Ingrese numero en base 2 para convertir a base 10: ").strip()
+                if stringBase2.lstrip("+-").isdigit():
+                    stringBase2 = int(stringBase2)
+                    break
+                else:
+                    print("Error: ingrese un número válido.")
+
+            nBase2 = []
+            nBase2Inv = nBase2[::-1]
+            numero = 0
+            for i in range(len(nBase2)):
+                numero += nBase2Inv[i] *2**i
+                print(f"{numero} = {nBase2Inv[i]} * 2 ** {i}")
+
+            print(numero)

@@ -7,8 +7,6 @@ while True:
         else:
             print("Error: ingrese un número válido.")
 
-
-
 base = 2
 
 # Condicional para caso normal
