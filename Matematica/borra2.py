@@ -25,12 +25,14 @@ while running:
             while True:
                 stringBase2 = input("Ingrese numero en base 2 para convertir a base 10: ").strip()
                 if stringBase2.lstrip("+-").isdigit():
-                    stringBase2 = int(stringBase2)
                     break
                 else:
                     print("Error: ingrese un número válido.")
 
             nBase2 = []
+            for i in range(len(stringBase2)):
+                nBase2.append(int(stringBase2[i]))
+
             nBase2Inv = nBase2[::-1]
             numero = 0
             for i in range(len(nBase2)):
@@ -38,3 +40,7 @@ while running:
                 print(f"{numero} = {nBase2Inv[i]} * 2 ** {i}")
 
             print(numero)
+
+        case 3:
+            print("Terminando programa...")
+            break
