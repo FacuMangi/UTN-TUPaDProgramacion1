@@ -158,7 +158,9 @@ while running:
                         complemento[i] = 1
                         break
                 
-                print(f"El numero en base 2 es: {complemento} en un sistema de {bits} bits")
+                stringNBinario = "".join(str(n) for n in complemento)
+                
+                print(f"El numero en base 2 es: {stringNBinario} en un sistema de {bits} bits")
 
         case 3:
             print("Terminando programa...")
