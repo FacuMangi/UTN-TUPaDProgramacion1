@@ -115,7 +115,7 @@ while running:
                 numero = []
 
                 while True:
-                    # Caso limite 1
+                    # Caso limite 0
                     if cociente == 0:
                         numero.append(0)
                         break
