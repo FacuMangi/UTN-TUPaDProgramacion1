@@ -48,7 +48,6 @@ while running:
             if noBinario:
                 print("El numero ingresado no es de base 2.")
                 continue
-
             # Si el primer elemento de nBase2 es 0 (el bit mas significativo), quiere decir que el numero es positivo
             if nBase2[0] == 0:
                 # Se invierte el array y empieza el proceso de conversion. Seria como arrancar de izquierda a derecha en el numero original.
@@ -109,7 +108,6 @@ while running:
                     palabra = 16
                 elif cociente > 32767:
                     palabra = 32
-                    print(palabra)
                 else:
                     palabra = 8
                 numero = []
