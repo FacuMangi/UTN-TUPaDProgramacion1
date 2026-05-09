@@ -3,50 +3,100 @@ Desarrollen un programa que convierta números decimales a binarios y, de forma 
 Extensión: Validar la entrada y mostrar mensajes de error ante datos incorrectos.
 
 Gemini:
--- Para tener un ejemplo claro y bien hecho del proceso y tener una secuencia de la cual escribir codigo --
-Transformar el numero 235 a binario. Mostrar paso por paso las divisiones, los restos y que numeros se toman.
+** Bueno para tener un ejemplo claro y bien hecho del proceso y tener una secuencia de la cual escribir codigo.
+Ej:
+Prompt:
+"Transformar el numero 235 a binario. Mostrar paso por paso las divisiones, los restos y que numeros se toman."
+Respuesta:
+"Para transformar el número -235 a binario usando el método de complemento a dos, seguimos estos pasos:
+1. Convertir el valor absoluto (235) a binario
+Dividimos sucesivamente por 2 y anotamos los restos:
+235 ÷ 2 = 117 (Resto: 1)
+117 ÷ 2 = 58 (Resto: 1)
+58 ÷ 2 = 29 (Resto: 0)
+29 ÷ 2 = 14 (Resto: 1)
+14 ÷ 2 = 7 (Resto: 0)
+7 ÷ 2 = 3 (Resto: 1)
+3 ÷ 2 = 1 (Resto: 1)
+1 ÷ 2 = 0 (Resto: 1)
+Tomamos los restos de abajo hacia arriba: 11101011.
+Como necesitamos trabajar con signo, usamos al menos 9 bits para que el bit de la izquierda sea 0 (positivo): 011101011.
+2. Aplicar Complemento a 1 (Invertir bits)
+Cambiamos los 0 por 1 y los 1 por 0:
+011101011 → 1000101003. 
+Aplicar Complemento a 2 (Sumar 1)
+Sumamos 1 al resultado anterior:
+100010100 + 1 = 100010101
+Resultado final:
+El número -235 en binario (complemento a dos, 9 bits) es: 100010101."
+
+Prompt:
+"cuanto es 1000 - 0001?"
+Respuesta:
+"Si estás trabajando en binario, el cálculo \(1000_2 - 0001_2\) (que en decimal sería \(8 - 1\)) se resuelve mediante el préstamo de bits (borrow):
+1000 - 0001 = 0111 
+El resultado es \(0111_{2}\) (7 en decimal)."
+Prompt:
+"Cuenta del -1 hasta el -9 en binario"
+Respuesta:
+ -- Devolvio una tabla que iba del -1 al -9 con sus equivalencias en binario valor absoluto, inviritiendo los bits y sumando 1.
+
+** Lo use mas que nada como un motor de busqueda que de ejemplos de como resolver ciertos casos y que me saque algunas dudas. **
 
 Copilot:
--- Revisar el codigo en busca de errores
-Estoy haciendo un convertidor de numeros de base 10 a numeros en base 2. Esta bien la logica del codigo? Hay algun error para corregir?
-Por ahora es solo la primera parte. Quiero que analices si la secuencia funcionara para los casos comunes. Ten en cuenta que ire agregando los casos limites y validaciones pertinentes.
+-- Revisar el codigo en busca de errores --
+Prompts usados:
+    Estoy haciendo un convertidor de numeros de base 10 a numeros en base 2. Esta bien la logica del codigo? Hay algun error para corregir?
+    Por ahora es solo la primera parte. Quiero que analices si la secuencia funcionara para los casos comunes. 
+    Ten en cuenta que ire agregando los casos limites y validaciones pertinentes.
+    ** Luego de esto hizo una devolucion con algunas mejoras que podria implementar. Perdi el chat por lo que no puedo adjuntar la respuesta. **
+
 
 -- Como estaba un poco atorado para hacer la suma en el proceso de transformar numeros negativos le pedi ideas a Copilot --
 Dame ideas para sumar 1 al resultado invertido. Fijate que ya estoy haciendo el complemento a 1 guardando el resultado en complementoUno
 
 -- Le pedi que me ayude a testearlo, me creo un archivo con una version hecha por el y comparo resultados --
 
+-- Que te parece el algoritmo que hice? cumple con la siguiente consigna?
+    Conversión de Números:
+    Desarrollen un programa que convierta números decimales a binarios y, de forma opcional, también de binario a decimal.
+    Extensión: Validar la entrada y mostrar mensajes de error ante datos incorrectos.
+
 NotebookLM:
--- Lo use como guia para comparar resultados de mi algoritmo con resultados dados por la ia fomentados por la teoria dada por la materia. 
-    De esta manera no me sali de los metodos brindados por la misma y segui los mismos procedimientos. --
-    Tambien lo use para consultar dudas conceptuales en los procedimientos. Mas que nada como una enciclopedia con la teoria dada.
+** Lo use como guia para comparar resultados de mi algoritmo con resultados dados por la ia fomentados por la teoria dada por la materia. 
+** De esta manera no me sali de los metodos brindados por la misma y segui los mismos procedimientos. --
+** Tambien lo use para consultar dudas conceptuales en los procedimientos. Mas que nada como una enciclopedia con la teoria dada.
+Ej: 
+Prompt: 
+"Cuales serian las reglas para convertir un numero de base 10 a base 2? me refiero a los casos limites como transformar 0 y 1 y a casos para números negativos."
+Respuesta: 
+"Para convertir un número de base 10 a base 2, las reglas varían según si el número es positivo o negativo:
+Números Positivos (Regla General)
+Se debe dividir el número decimal por 2 de forma sucesiva hasta que el cociente sea menor a 2. El número binario se compone leyendo el último cociente y luego todos los restos obtenidos, desde el último hacia el primero (de derecha a izquierda).
 
-Texto:
-    La primera opcion es para convertir de base 2 a base 10. 
-    Esta seccion funciona de forma tal que el signo del numero en base 2 se identifica por el bit mas significativo del numero ingresado por el usuario. (El bit mas a la izquierda)
-    El numero ingresado se guarda como un array donde cada bit es un elemento del mismo.
+    Caso del 0: El número 0 en decimal equivale a 0 en binario.
+    Caso del 1: El número 1 en decimal equivale a 1 en binario.
 
-        Si empieza con 1 a la izquierda se tomara como negativo y si empieza con 0 se tomara como positivo.
+Números Negativos
+Para representar negativos se utiliza el método de complemento a dos siguiendo estos pasos:
 
-        En el caso que empiece con 0 (o sea, positivo), lo que se hace es recorrer el array desde el ultimo elemento al primero (seria de derecha a izquierda) con un loop for
-        A cada elemento se multiplican por las potencias de 2 que van variando dependiendo del lugar que ocupe el elemento. (Si es el tercer elemento seria la potencia cuadrada, si es el primero seria la potencia 0, etc...)
-        Y se van sumando a la constante numero que esta seteada en 0. Esto equivale al proceso de transformar un numero en base 2 a base 10.
+    Definir el tamaño de palabra: Por ejemplo, 8 bits.
+    Binario del valor absoluto: Convertir el número (sin el signo) a binario y completar con ceros a la izquierda hasta alcanzar el tamaño de palabra definido.
+    Complemento a 1: Invertir todos los bits (los 0 pasan a ser 1 y los 1 pasan a ser 0).
+    Complemento a 2: Sumar 1 al resultado anterior.
+    Bit de signo: El bit más a la izquierda (el más significativo) indicará el signo: 1 para negativo y 0 para positivo.
 
-        En el caso que empiece con 1 lo que se hace es calcular el complemento 1. Con un loop FOR se cambian todos los UNOS por CEROS y los CEROS por UNOS.
-        Luego se le suma uno. Esto se hace con otro loop FOR. Se recorre el array desde el final hacia el inicio cambiando todos los UNOS por CEROS hasta que se encuentre un CERO.
-        En ese momento se cambia el CERO por UNO y se corta el loop. Si esto no llegase a pasar y se llegase al final del array, se incerta un 1 como primer numero, agregando un bit mas al numero en base 2.
-        Finalmente se realiza el proceso de conversion tradicional para numeros positivos y luego se multiplica por -1 asignandole el signo que corresponde al numero en base 10.
-    
-    La segunda opcion es para convertir de base 10 a base 2. Esta opcion puede convertir numeros de base 10 a base 2 hasta un total de 32 bits. 
-    La idea general es hacer el procedmiento ensenado. Tomar el numero ingresado por el usuario y dividirlo por dos. 
-    Me quedo con el resto que sera 1 o 0 y al resultado lo vuelvo a dividir por 2. Asi hasta que el cociente sea 1. Todos estos seran los bits del numero, que se van agregando a un array.
-        
-        Entonces, lo primero que se hace es evaluar si el numero es POSITIVO o IGUAL a CERO y luego se asigna un tamanio de palabra dependiendo del valor ingresado, siguiendo los valores dados en la teoria. 
-        Notar que para los casos limites de 1 y cero no se hacen divisiones, solo se agregan los numeros al array.
+¿Te gustaría que hagamos un ejemplo paso a paso con un número negativo específico?"
 
-        Luego se hace un loop en el que primero se fija si la cantidad de bits en el array numero es menor que el tamanio de palabra. Si es asi, se agregan CEROS al array hasta que tenga la cantidad de bits necesaria.
-        Finalmente se invierte el array para que el numero en base 2 se lea de izquierda a derecha.
+Prompt:
+"Que reglas debo seguir para calcular el complemento a dos de un numero en base 2?"
+Respuesta:
+"Para calcular el complemento a dos (CA2) de un número binario, debes seguir estos pasos basados en los materiales:
 
-        Para los numeros negativos el procedimiento tiene algunos pasos extra. Se hace la transformacion para el valor absoluto del numero y se agregan los ceros hasta completar la palabra.
+    Fijar el tamaño de palabra: Define cuántos bits usarás (por ejemplo, 8 bits).
+    Igualar bits: Si el número tiene menos bits que el tamaño definido, añade ceros a la izquierda.
+    Obtener el complemento a uno (CA1): Invierte todos los bits; los 0 pasan a ser 1 y los 1 pasan a ser 0.
+    Sumar 1: Suma una unidad binaria al resultado del complemento a uno.
+    Descarte de acarreo: Si al sumar 1 se genera un bit extra que excede el tamaño de palabra definido, ese bit de la izquierda se descarta.
 
-        Luego se calcula el complemento a 1 y se le suma 1 como se hizo ANTERIORMENTE.
+En este sistema, el bit más a la izquierda (MSB) indica el signo: 0 para positivo y 1 para negativo"
