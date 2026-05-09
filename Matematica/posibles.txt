@@ -17,4 +17,17 @@ Dame ideas para sumar 1 al resultado invertido. Fijate que ya estoy haciendo el 
 -- Le pedi que me ayude a testearlo, me creo un archivo con una version hecha por el y comparo resultados --
 
 NotebookLM:
--- Lo use como guia para comparar resultados de mi algoritmo con resultados dados por la ia fomentados por la teoria dada por la materia. De esta manera no me sali de los metodos brindados por la misma y segui los mismos procedimientos. --
+-- Lo use como guia para comparar resultados de mi algoritmo con resultados dados por la ia fomentados por la teoria dada por la materia. 
+    De esta manera no me sali de los metodos brindados por la misma y segui los mismos procedimientos. --
+    Tambien lo use para consultar dudas conceptuales en los procedimientos. Mas que nada como una enciclopedia con la teoria dada.
+
+Texto:
+    La primera opcion es para convertir de base 2 a base 10. 
+    Esta seccion funciona de forma tal que el signo del numero en base 2 se identifica por el bit mas significativo del numero ingresado por el usuario. 
+    El numero ingresado se guarda como un array donde cada bit es un elemento del mismo.
+
+    Si empieza con 1 a la izquierda se tomara como negativo y si empieza con 0 se tomara como positivo.
+
+    En el caso que empiece con cero, lo que se hace es recorrer el array desde el ultimo elemento al primero (seria como de derecha a izquierda) con un loop for
+    A cada elemento se multiplican por las potencias de 2 que van variando dependiendo del lugar que ocupe el elemento. (Si es el tercer elemento sera la potencia cuadrada, si es el primero sera la potencia 0, etc...)
+    Y se van sumando a la constante numero que esta seteada en 0. Esto equivale al proceso de transformar un numero en base 2 a base 10.
