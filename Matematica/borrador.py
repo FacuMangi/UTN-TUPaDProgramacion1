@@ -12,54 +12,18 @@ cociente = -10
 
 base = 2
 
-numero = []
+#al estar iterando sobre un numero negativo, los 0 pasan a ser 1 y cuando un 1 pasa a ser un 0 es que avanzo en el digito y se debe cortar.
 
-while True:
-    #print(f"cociente: {abs(cociente)}")
-    #print(f"Resto: {abs(cociente) % base}")
-    # Agrego el resto al numero
-    numero.append(abs(cociente) % base)
-    # Redefino cociente como la division entera 
-    cociente = abs(cociente) // base
-    
-    # Cuando el cociente llegue a 1 agrego un 1 extra, que es lo que se hace al final del proceso.
-    if cociente == 1:
-        numero.append(1)
-        break
+nBase2 = [1,1,1,1,1,0,0,0]
 
-# Loop while que agrega ceros al array hasta que la cantidad de bits sea multiplo de 8
-if len(numero) % 8 != 0:
-    while len(numero) % 8 != 0:
-        numero.append(0)
-        # Si la cantidad de bits en el array es multiplo de 8 Break
-        if len(numero) % 8 == 0:
-            break
-
-print(f"Numero en base 2: {numero[::-1]}")
-
-palabra = len(numero)
-nBinario = numero[::-1]
-
-for i in range(len(nBinario)):
-    if nBinario[i] == 0:
-        nBinario[i] = 1
-    elif nBinario[i] == 1:
-        nBinario[i] = 0
-
-complementoUno = nBinario
-print(f"Complemento 1: {complementoUno}")
-
-# Recorro el complementoUno desde la derecha a la izquierda
-for i in range(len(complementoUno)-1, -1, -1):
-    if complementoUno[i] == 1:
-        complementoUno[i] = 0
+for i in range(len(nBase2)-1, -1, -1):
+    if nBase2[i] == 1:
+        nBase2[i] = 0
         if i == 0:
-            complementoUno.insert(0, 1)
-        continue
-    if complementoUno[i] == 0:
-        complementoUno[i] = 1
+            nBase2.insert(0, 1)
         break
-    
-print(f"El numero en base 2 es: {complementoUno} en un sistema de {palabra} bits")
+    nBase2[i] = 1
 
-# El loop recorre de derecha a izquierda cambiando todos los 1 por 0. Cuando se encuentra un 0, cambia este a 1 y se corta el loop. Esto es porque se usa el carry y a partir de ahi es lo mismo que ir sumando cero. O sea, no cambia el numero.
+print(nBase2)
+
+# Por que se calcula el complemento a 2? porque los numeros negativos estan desfazados de los positivos y cuando queres pasar un positivo y escribirlo como negativo, tenes que compensar ese desfasage sumando 1. Por eso, haces el complemento de invetir los bits (complemento 1) y le restas 0001 (sumas 1111). Eso es porque los negativos son los positivos pero con ceros tomando el lugar de unos.  

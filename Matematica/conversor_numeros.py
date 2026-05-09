@@ -23,41 +23,79 @@ while running:
         #CARGA INICIAL DE HERRAMIENTAS
         case 1:
             while True:
-                stringBase2 = input("Ingrese numero en base 2 para convertir a base 10: ").strip()
+                stringBase2 = input("Ingrese numero en base 2 para convertir a base 10 (En sistema de 8, 26 o 32 bits): ").strip()
                 if stringBase2.lstrip("+-").isdigit():
+                    stringBase2 = stringBase2.lstrip("+-")
                     break
                 else:
                     print("Error: ingrese un número válido.")
 
             # Seteando flag
             noBinario = False
+            
             # Para hacer el array con el numero ingresado, se itera sobre el string y cada elemento de la cadena se convierte en un integer
             nBase2 = []
+            
+            ceros = 0
+            unos = 0
+
             for i in range(len(stringBase2)):
-                # Como validacion extra se revisa que los valores de cada elemento de la cadena sean o 1 o 0.
+                if int(stringBase2[i]) == 0:
+                    ceros += 1
+                if int(stringBase2[i]) == 1:
+                    unos += 1
+                # Como validacion extra se revisa que los valores de cada elemento de la cadena sean 1 o 0.
                 if int(stringBase2[i]) != 1 and int(stringBase2[i]) != 0:
-                    # En caso de no cumplirse con lo anterior, se activa la flag.
+                    # Si NO son 1 y NO son 0, se activa la flag y sale del for loop.
                     noBinario = True
                     break
                 nBase2.append(int(stringBase2[i]))
+            
+            if ceros == len(stringBase2):
+                print(f"El numero en base 10 es: 0.")
+            if unos == len(stringBase2):
+                print(f"El numero en base 10 es: -1.")
             
             # Si la flag esta activa se imprime un mensaje y se sale del case.
             if noBinario:
                 print("El numero ingresado no es de base 2.")
                 continue
 
-            nBase2 = []
-            for i in range(len(stringBase2)):
-                nBase2.append(int(stringBase2[i]))
+            # Si el primer elemento de nBase2 es 0 (el bit mas significativo), quiere decir que el numero es positivo
+            if nBase2[0] == 0:
+                # Se invierte el array y empieza el proceso de conversion. Seria como arrancar de izquierda a derecha en el numero original.
+                nBase2Inv = nBase2[::-1]
+                # Se setea el numero en 0 para ir sumando las potencias de 2 multiplicadas por los 1 y 0
+                numero = 0
+                for i in range(len(nBase2)):
+                    # Se hace la suma por cada elemento del array
+                    numero += nBase2Inv[i] *2**i
+            
+            # Si el primer elemento de nBase2 es 1 (el bit mas significativo), quiere decir que es negativo.
+            else:
+                for i in range(len(nBase2)-1, -1, -1):
+                    if nBase2[i] == 1:
+                        nBase2[i] = 0
+                        if i == 0:
+                            nBase2.insert(0, 1)
+                        break
+                    nBase2[i] = 1
 
-            # Si no se activo la flag continua a las siguiente linea
-            # Se invierte el array y empieza el proceso de conversion. Seria como arrancar de izquierda a derecha en el numero original.
-            nBase2Inv = nBase2[::-1]
-            # Se setea el numero en 0 para ir sumando las potencias de 2 multiplicadas por los 1 y 0
-            numero = 0
-            for i in range(len(nBase2)):
-                # Se hace la suma por cada elemento del array
-                numero += nBase2Inv[i] *2**i
+                # Calcula complemento 1
+                for i in range(len(nBase2)):
+                    if nBase2[i] == 0:
+                        nBase2[i] = 1
+                    elif nBase2[i] == 1:
+                        nBase2[i] = 0
+                
+                # Se invierte el array y empieza el proceso de conversion. Seria como arrancar de izquierda a derecha en el numero original.
+                nBase2Inv = nBase2[::-1]
+                # Se setea el numero en 0 para ir sumando las potencias de 2 multiplicadas por los 1 y 0
+                numero = 0
+                for i in range(len(nBase2)):
+                    # Se hace la suma por cada elemento del array
+                    numero += nBase2Inv[i] *2**i
+                numero = -1*numero
 
             print(f"El numero en base 10 es: {numero}.")
 
