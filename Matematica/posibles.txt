@@ -32,4 +32,21 @@ Texto:
         A cada elemento se multiplican por las potencias de 2 que van variando dependiendo del lugar que ocupe el elemento. (Si es el tercer elemento seria la potencia cuadrada, si es el primero seria la potencia 0, etc...)
         Y se van sumando a la constante numero que esta seteada en 0. Esto equivale al proceso de transformar un numero en base 2 a base 10.
 
-        En el caso que empiece con 1 lo que 
+        En el caso que empiece con 1 lo que se hace es calcular el complemento 1. Con un loop FOR se cambian todos los UNOS por CEROS y los CEROS por UNOS.
+        Luego se le suma uno. Esto se hace con otro loop FOR. Se recorre el array desde el final hacia el inicio cambiando todos los UNOS por CEROS hasta que se encuentre un CERO.
+        En ese momento se cambia el CERO por UNO y se corta el loop. Si esto no llegase a pasar y se llegase al final del array, se incerta un 1 como primer numero, agregando un bit mas al numero en base 2.
+        Finalmente se realiza el proceso de conversion tradicional para numeros positivos y luego se multiplica por -1 asignandole el signo que corresponde al numero en base 10.
+    
+    La segunda opcion es para convertir de base 10 a base 2. Esta opcion puede convertir numeros de base 10 a base 2 hasta un total de 32 bits. 
+    La idea general es hacer el procedmiento ensenado. Tomar el numero ingresado por el usuario y dividirlo por dos. 
+    Me quedo con el resto que sera 1 o 0 y al resultado lo vuelvo a dividir por 2. Asi hasta que el cociente sea 1. Todos estos seran los bits del numero, que se van agregando a un array.
+        
+        Entonces, lo primero que se hace es evaluar si el numero es POSITIVO o IGUAL a CERO y luego se asigna un tamanio de palabra dependiendo del valor ingresado, siguiendo los valores dados en la teoria. 
+        Notar que para los casos limites de 1 y cero no se hacen divisiones, solo se agregan los numeros al array.
+
+        Luego se hace un loop en el que primero se fija si la cantidad de bits en el array numero es menor que el tamanio de palabra. Si es asi, se agregan CEROS al array hasta que tenga la cantidad de bits necesaria.
+        Finalmente se invierte el array para que el numero en base 2 se lea de izquierda a derecha.
+
+        Para los numeros negativos el procedimiento tiene algunos pasos extra. Se hace la transformacion para el valor absoluto del numero y se agregan los ceros hasta completar la palabra.
+
+        Luego se calcula el complemento a 1 y se le suma 1 como se hizo ANTERIORMENTE.

@@ -144,6 +144,7 @@ while running:
                             break  
 
                 bits = len(numero)
+                # Se invierte el array para que el numero en base 2 se lea de izquierda a derecha.
                 nBinario = numero[::-1]
                 stringNBinario = "".join(str(n) for n in nBinario)
 
@@ -186,6 +187,8 @@ while running:
                             break
 
                 bits = len(numero)
+
+                # Se invierte el array para que el numero en base 2 se lea de izquierda a derecha.
                 nBinario = numero[::-1]
 
                 # Calcula complemento 1
