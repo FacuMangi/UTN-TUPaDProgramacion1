@@ -23,11 +23,13 @@ NotebookLM:
 
 Texto:
     La primera opcion es para convertir de base 2 a base 10. 
-    Esta seccion funciona de forma tal que el signo del numero en base 2 se identifica por el bit mas significativo del numero ingresado por el usuario. 
+    Esta seccion funciona de forma tal que el signo del numero en base 2 se identifica por el bit mas significativo del numero ingresado por el usuario. (El bit mas a la izquierda)
     El numero ingresado se guarda como un array donde cada bit es un elemento del mismo.
 
-    Si empieza con 1 a la izquierda se tomara como negativo y si empieza con 0 se tomara como positivo.
+        Si empieza con 1 a la izquierda se tomara como negativo y si empieza con 0 se tomara como positivo.
 
-    En el caso que empiece con cero, lo que se hace es recorrer el array desde el ultimo elemento al primero (seria como de derecha a izquierda) con un loop for
-    A cada elemento se multiplican por las potencias de 2 que van variando dependiendo del lugar que ocupe el elemento. (Si es el tercer elemento sera la potencia cuadrada, si es el primero sera la potencia 0, etc...)
-    Y se van sumando a la constante numero que esta seteada en 0. Esto equivale al proceso de transformar un numero en base 2 a base 10.
+        En el caso que empiece con 0 (o sea, positivo), lo que se hace es recorrer el array desde el ultimo elemento al primero (seria de derecha a izquierda) con un loop for
+        A cada elemento se multiplican por las potencias de 2 que van variando dependiendo del lugar que ocupe el elemento. (Si es el tercer elemento seria la potencia cuadrada, si es el primero seria la potencia 0, etc...)
+        Y se van sumando a la constante numero que esta seteada en 0. Esto equivale al proceso de transformar un numero en base 2 a base 10.
+
+        En el caso que empiece con 1 lo que 

@@ -61,13 +61,14 @@ while running:
             
             # Si el primer elemento de nBase2 es 1 (el bit mas significativo), quiere decir que es negativo.
             else:
-                for i in range(len(nBase2)-1, -1, -1):
-                    if nBase2[i] == 1:
-                        nBase2[i] = 0
-                        if i == 0:
-                            nBase2.insert(0, 1)
-                        break
-                    nBase2[i] = 1
+                # Loop while que agrega UNOS al array hasta que la cantidad de bits sea multiplo de 8
+                if len(nBase2) % 8 != 0:
+                    while len(nBase2) % 8 != 0:
+                        nBase2.insert(0, 1)
+                        # Si la cantidad de bits en el array es multiplo de 8 Break
+                        if len(nBase2) % 8 == 0:
+                            break 
+                print(nBase2)
 
                 # Calcula complemento 1
                 for i in range(len(nBase2)):
@@ -75,6 +76,18 @@ while running:
                         nBase2[i] = 1
                     elif nBase2[i] == 1:
                         nBase2[i] = 0
+                print(nBase2)
+
+                # Le sumo 1 
+                for i in range(len(nBase2)-1, -1, -1):
+                    if nBase2[i] == 1:
+                        nBase2[i] = 0
+                        if i == 0:
+                            nBase2.insert(0, 1)
+                        continue
+                    if nBase2[i] == 0:
+                        nBase2[i] = 1
+                        break
                 
                 # Se invierte el array y empieza el proceso de conversion. Seria como arrancar de izquierda a derecha en el numero original.
                 nBase2Inv = nBase2[::-1]
