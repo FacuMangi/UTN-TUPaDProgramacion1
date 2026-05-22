@@ -58,10 +58,21 @@ while True:
                     agregando = False
             print(contactos)
 
-        # # Ejercicio 5
-        # case "5":
-            
+        # Ejercicio 5
+        case "5":
+            while True:
+                listaPalabras = input("Ingresa la frase: ").split()
+                if listaPalabras and all(caracter.isalpha() or caracter.isspace() for caracter in listaPalabras):
+                        break
+                print("Error: La frase solo debe contener letras y no puede quedar vacío.")
+            elSet = set(listaPalabras)
+            print(elSet)
 
+            diccionario = {}
+            for palabra in listaPalabras:
+                diccionario[palabra] = listaPalabras.count(palabra)
+
+            print(diccionario)
         # # Ejercicio 6
         # case "6":
             
