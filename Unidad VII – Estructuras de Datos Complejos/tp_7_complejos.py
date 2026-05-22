@@ -35,17 +35,13 @@ while True:
         # Ejercicio 4
         case "4":
             contactos = {}
-
-            looping = True
-            while looping:
-                nuevosContactos = []
+            agregando = True
+            while agregando:
                 while True:
-
                     nombre = input("Ingresa tu nombre: ").strip()
                     
                     # Valida que no esté vacío y que solo contenga letras y espacios
                     if nombre and all(caracter.isalpha() or caracter.isspace() for caracter in nombre):
-                        nuevosContactos.append(nombre)
                         break
                     print("Error: El nombre solo debe contener letras y no puede quedar vacío.")
                 while True:
@@ -53,13 +49,14 @@ while True:
                     
                     if telefono.isdigit():
                             telefono = int(telefono)
-                            nuevosContactos.append(telefono)
                             break
                     print("Error: El teléfono debe contener solo números.")
-                
-                if len(nuevosContactos) == 2:
-                    contactos.update(nuevosContactos)
-                    #ARREGLAR PARA QUE FUNCIONE
+                    
+                contactos[nombre] = telefono
+                respuesta = input("¿Deseas agregar otro contacto? (s/n): ").strip().lower()
+                if respuesta != 's':
+                    agregando = False
+            print(contactos)
 
         # # Ejercicio 5
         # case "5":
