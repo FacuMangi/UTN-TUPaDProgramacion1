@@ -93,9 +93,16 @@ while True:
                 diccionarioAlumnos[alumno] = tuple(tuplaNotas)
             print(diccionarioAlumnos)
 
-        # # Ejercicio 7
-        # case "7":
-            
+        # Ejercicio 7
+        case "7":
+            listaEmpleados = ["Ana", "Luis", "Ana", "Maria", "Luis", "Pedro", "Ana"]
+            setEmpleados = set(listaEmpleados)
+            for empleado in setEmpleados: print(empleado)
+            diccionario = {}
+            for empleado in listaEmpleados:
+                diccionario[empleado] = listaEmpleados.count(empleado)
+            for k, v in diccionario.items():
+                print(f"{k} asistio {v} veces.")
 
         # # Ejercicio 8
         # case "8":
