@@ -73,9 +73,25 @@ while True:
                 diccionario[palabra] = listaPalabras.count(palabra)
 
             print(diccionario)
-        # # Ejercicio 6
-        # case "6":
+        # Ejercicio 6
+        case "6":
+            listaAlumnos = []
+            for i in range(1, 4):
+                while True:
+                    alumno = input(f"Ingrese el alumno {i}: ").split()
+                    if alumno and all(caracter.isalpha() or caracter.isspace() for caracter in alumno):
+                            break
+                    print("Error: El alumno solo debe contener letras y no puede quedar vacío.")
+                    
+                listaAlumnos.append(alumno)
             
+            diccionarioAlumnos = {}
+            for alumno in listaAlumnos:
+                tuplaNotas = []
+                for i in range(1, 4):
+                    tuplaNotas.append(input(f"Ingrese la nota {i} para {alumno}: "))
+                diccionarioAlumnos[alumno] = tuple(tuplaNotas)
+            print(diccionarioAlumnos)
 
         # # Ejercicio 7
         # case "7":
