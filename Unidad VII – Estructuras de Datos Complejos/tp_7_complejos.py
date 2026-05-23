@@ -140,7 +140,7 @@ while True:
                             if producto.isalpha():
                                 break
                             else:
-                                print("Ingrese un valor valido.")
+                                print("Error: ingrese un número válido.")
                         #Validacion de que el procucto ingresado este en el stock
                         if not producto in stock:
                             print("El producto ingresado no esta en el inventario.")
@@ -161,7 +161,7 @@ while True:
                             if producto.isalpha():
                                 break
                             else:
-                                print("Ingrese un valor valido.")
+                                print("Error: ingrese un número válido.")
                         while True:
                             agregarStock = int(input("Ingrese el stock: ").strip())
                             if agregarStock.lstrip("+-").isdigit():
@@ -170,10 +170,70 @@ while True:
                                 print("Ingrese un numero valido.")
                         stock[producto] += nuevoStock
 
-        # # Ejercicio 9
-        # case "9":
-            
+        # Ejercicio 9
+        case "9":
+            agenda = {
+                ("lunes", "10:00") : "Reunion",
+                ("martes", "15:00") : "Clase de ingles"
+            }
 
+            usuario = True
+            while usuario:
+                    print("Elige acción:\n"
+                        "-1- Consultar itinerario \n"
+                        "-2- Agregar evento \n"
+                        "-3- Salir \n")
+                    
+                    menu = {"1", "2", "3"}
+                    while True:
+                        accion = input("Accion: ").strip()
+                        if accion.lstrip("+-").isdigit():
+                            if accion in menu:
+                                break
+                            print("Error: accion fuera de rango")
+                        else:
+                            print("Error: ingrese un número válido.")
+                    
+                    if accion == "1":
+                        while True:
+                            dia = input("Ingrese el dia a consultar: ").strip().lower()
+                            if dia.isalpha():
+                                break
+                            else:
+                                print("Error: ingrese un valor válido.")
+
+                        hora = input("Ingrese la hora a consultar: ").strip()
+                        
+                        tuplaIngresada = (dia, hora)
+                        if tuplaIngresada in agenda:
+                            print(f"En el dia {dia} a la hora {hora} tienes: {agenda[tuplaIngresada]}")
+                        else:
+                            print(f"No hay nada en la agenda para el dia {dia} a la hora {hora}.")
+                            
+                    if accion == "2":
+                        # Ingresando valores para la tupla a agregar a agenda
+                        while True:
+                            dia = input("Ingrese el dia: ").strip().lower()
+                            if dia.isalpha():
+                                break
+                            else:
+                                print("Error: ingrese un valor válido.")
+
+                        hora = input("Ingrese la hora: ").strip()                       
+                        tuplaIngresada = (dia, hora)
+                        # Ingresando evento
+                        while True:
+                            evento = input("Ingrese el evento: ").strip()
+                            if evento.isalpha():
+                                break
+                            else:
+                                print("Error: ingrese un valor válido.")
+
+                        agenda[tuplaIngresada] = evento
+                    
+                    if accion == "3":
+                        break
+                    
         # # Ejercicio 10
         # case "10":
                
