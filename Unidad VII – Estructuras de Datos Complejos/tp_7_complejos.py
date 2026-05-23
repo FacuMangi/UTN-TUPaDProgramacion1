@@ -104,9 +104,71 @@ while True:
             for k, v in diccionario.items():
                 print(f"{k} asistio {v} veces.")
 
-        # # Ejercicio 8
-        # case "8":
-            
+        # Ejercicio 8
+        case "8":
+            stock = {
+                "pantalon": 45,
+                "camisa": 120,
+                "zapatillas": 18,
+                "remera": 85,
+                "campera": 12
+            }
+
+            cliente = True
+            while cliente:
+                    print("Elige acción:\n"
+                        "-1- Ver Stock \n"
+                        "-2- Agregar Stock\n"
+                        "-3- Agaregar Producto")
+                    
+                    menu = {"1", "2", "3"}
+                    while True:
+                        accion = input("Accion: ").strip()
+                        if accion.lstrip("+-").isdigit():
+                            if accion in menu:
+                                break
+                            print("Error: accion fuera de rango")
+                        else:
+                            print("Error: ingrese un número válido.")
+                    
+                    if accion == "1":
+                        print(stock)
+                    
+                    if accion == "2":
+                        while True:
+                            producto = input("Ingrese el producto para agregarle el stock: ").strip().lower()
+                            if producto.isalpha():
+                                break
+                            else:
+                                print("Ingrese un valor valido.")
+                        #Validacion de que el procucto ingresado este en el stock
+                        if not producto in stock:
+                            print("El producto ingresado no esta en el inventario.")
+                            break
+                        while True:
+                            agregarStock = int(input("Ingrese el stock a agregar: ").strip())
+                            if agregarStock.lstrip("+-").isdigit():
+                                break
+                            else:
+                                print("Ingrese un numero valido.")
+                        nuevoStock = agregarStock
+                        #Validacion nuevoStock
+                        stock[producto] += nuevoStock
+
+                    if accion == "3":
+                        while True:
+                            producto = input("Ingrese el producto para agregar: ").strip().lower()
+                            if producto.isalpha():
+                                break
+                            else:
+                                print("Ingrese un valor valido.")
+                        while True:
+                            agregarStock = int(input("Ingrese el stock: ").strip())
+                            if agregarStock.lstrip("+-").isdigit():
+                                break
+                            else:
+                                print("Ingrese un numero valido.")
+                        stock[producto] += nuevoStock
 
         # # Ejercicio 9
         # case "9":
