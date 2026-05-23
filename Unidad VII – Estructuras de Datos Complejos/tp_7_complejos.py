@@ -233,10 +233,17 @@ while True:
                     
                     if accion == "3":
                         break
-                    
-        # # Ejercicio 10
-        # case "10":
-               
+
+        # Ejercicio 10
+        case "10":
+               original = {
+                   "Argentina": "Buenos Aires",
+                   "Chile": "Santiago"
+               }
+               # Un loop for que recorre los pares clave-valor para el original, invirtiendo esta dupla para el dicc invertido
+               invertido = {valor: clave for clave, valor in original.items()}        
+               print(original)
+               print(invertido)
 
         case "0":
             print("Terminando programa...")
