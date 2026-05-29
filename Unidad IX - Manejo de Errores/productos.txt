@@ -1,0 +1,5 @@
+Manzanas,120.5,50
+Leche,95.0,30
+Pan,80.0,15
+Lapicera,120.5,30
+Huevos,5.0,30
