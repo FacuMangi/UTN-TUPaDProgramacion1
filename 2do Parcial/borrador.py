@@ -6,7 +6,7 @@ def cargaHerramientas(cantidad: int) -> dict:
         while True:
             nombre = input("Ingrese el nombre de la herramienta: ").strip()
             if nombre and nombre.replace(" ", "").isalpha():
-                nombre = nombre.title()
+                nombre = nombre.lower()
                 if nombre in inventario:
                     print("Error: herramienta ya ingresada.")
                 else:
@@ -25,16 +25,31 @@ def cargaHerramientas(cantidad: int) -> dict:
         inventario[nombre] = inventario.get(nombre, 0) + cant
 
     return inventario
+    
+def mostrarInventario(inventario):
+    if len(inventario) == 0:
+        print("No hay herramientas cargadas.")
+    print(f"=== INVENTARIO ===")
+    for ele in inventario:
+        for key, value in ele.items():
+            print(f"Herramienta: {key}, existencias: {value}")
 
+def buscarHerramienta(inventario, nombre):
+    # Recorre el array que se le pase, busca el nombre y se encuentra devuelve el valor asociado al nombre
+    for item in inventario:
+        if nombre in item:
+            return item[nombre]
+    return None
+    
 def menu():
-    inventario = []
+    inventario = [{"martillo": 20}]
     running = True
     while running:
         print("Elige opcion:\n"
         "-1- Ingresar HERRAMIENTAS \n"
-        "-2- Ingresar EXISTENCIAS \n"
-        "-3- Visualizar Inventario\n"
-        "-4- Buscar Herramienta\n"
+        "-2- Visualizar Inventario\n"
+        "-3- Buscar Herramienta \n"
+        "-4- Ingresar EXISTENCIAS\n"
         "-5- Reporte de Agotados\n"
         "-6- Alta de Nuevo Producto\n"
         "-7- Actualizacion de Stock\n"
@@ -67,4 +82,23 @@ def menu():
                 for nombre, cant in herramientas.items():
                     inventario.append({nombre: cant})
 
+            case 2:
+            # Por ahora print a la lista de diccionarios
+                mostrarInventario(inventario)
+
+            case 3:
+                # Se pide ingresar herramienta a buscar
+                while True:
+                    nombre = input("Ingrese el nombre de la herramienta: ").strip()
+                    if nombre and nombre.replace(" ", "").isalpha():
+                        nombre = nombre.lower()
+                        break
+                    else:
+                        print("Error: nombre inválido (solo letras).")
+                # Se llama funcion de busqueda, si da None imprime mensaje, sino imprime stock
+                stock = buscarHerramienta(inventario, nombre)
+                if stock is None:
+                    print("La herramienta no se encuentra en el inventario.")
+                else:
+                    print(f"Stock de {nombre}: {stock}")
 menu()
