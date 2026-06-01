@@ -21,6 +21,7 @@ def cargaHerramientas(cantidad: int) -> dict:
                 break
             print("Error: ingrese una cantidad entera no negativa.")
 
+        # Agreaga el nombre de la herramienta con su cantidad, si la herramienta ya esta en inventario, le agrega mas valor al que ya tenga
         inventario[nombre] = inventario.get(nombre, 0) + cant
 
     return inventario
@@ -60,7 +61,9 @@ def menu():
                     cantidad = input("Ingrese la cantidad de herramientas a ingresar: ")
                 cantidad = int(cantidad)
 
+                # Llamo a cargaHerramientas, guardo el diccionario que devuelve en la variable herramientas
                 herramientas = cargaHerramientas(cantidad)
+                # Recorro las duplas de clave - valor y las agrego a la lista inventario
                 for nombre, cant in herramientas.items():
                     inventario.append({nombre: cant})
 
