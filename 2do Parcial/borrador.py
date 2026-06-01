@@ -2,10 +2,10 @@
 def cargaHerramientas(cantidad: int, inventario) -> dict:
     paraAgregar = {}
     # Se hace un loop que se ejecuta una cantidad de veces ingresada previamente por el user
-    try:
-        for _ in range(cantidad):
-            # Se valida y se ingresa la herramienta
-            while True:
+    for _ in range(cantidad):
+        # Se valida y se ingresa la herramienta
+        while True:
+            try:
                 nombre = input("Ingrese el nombre de la herramienta: ").strip()
 
                 if not nombre:
@@ -18,11 +18,15 @@ def cargaHerramientas(cantidad: int, inventario) -> dict:
                 # Uso buscarHerramienta para verificar que la herramienta no este en inventario
                 if buscarHerramienta(inventario, nombre) is not None:
                     raise ValueError("Error: nombre ya cargado previamente.")
-                    
+                
                 break
+            
+            except ValueError as e:
+                print(e)
 
-            # Se valida y se ingresa el stock
-            while True:
+        # Se valida y se ingresa el stock
+        while True:
+            try:
                 # EL USUARIO INGRESA CANTIDAD DE STOCK
                 cant = input(f"Ingrese la cantidad de stock para {nombre}: ")
 
@@ -38,15 +42,11 @@ def cargaHerramientas(cantidad: int, inventario) -> dict:
                 cant = int(cant)
                 break
 
-            # Agreaga el nombre de la herramienta con su cantidad, si la herramienta ya esta en inventario, le agrega mas valor al que ya tenga
-            paraAgregar[nombre] = paraAgregar.get(nombre, 0) + cant
+            except ValueError as e:
+                print(e)
 
-    except ValueError as e:
-        print(e)
-    
-    except Exception as e:
-        # Captura fallos generales
-        print(f"Se produjo un error inesperado: {e}")
+        # Agreaga el nombre de la herramienta con su cantidad, si la herramienta ya esta en inventario, le agrega mas valor al que ya tenga
+        paraAgregar[nombre] = paraAgregar.get(nombre, 0) + cant
 
     return paraAgregar
     
@@ -105,10 +105,6 @@ def cargaNuevoProd(inventario):
         
         except ValueError as e:
             print(e)
-        
-        except Exception as e:
-            # Captura fallos generales
-            print(f"Se produjo un error inesperado: {e}")
 
     # Se valida y se ingresa el stock
     while True:
@@ -130,13 +126,8 @@ def cargaNuevoProd(inventario):
 
         except ValueError as e:
             print(e)
-
-        except Exception as e:
-            # Captura fallos generales
-            print(f"Se produjo un error inesperado: {e}")
     
     nueva[nombre] = cant
-
     return nueva
 
 def actualizarStock(inventario):
@@ -244,7 +235,6 @@ def menu():
 
                     # Llamo a cargaHerramientas, guardo el diccionario que devuelve en la variable herramientas
                     herramientas = cargaHerramientas(cantidad, inventario)
-                    print(f"Que es esto: {herramientas}")
 
                     # Recorro las duplas de clave - valor y las agrego a la lista inventario
                     for nombre, cant in herramientas.items():
