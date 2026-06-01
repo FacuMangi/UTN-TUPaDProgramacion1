@@ -1,30 +1,62 @@
-def cargaHerramientas(cantidad: int) -> dict:
-    inventario = {}
+# La funcion cargaHerramientas recibe un valor cantidad y el inventario y devuelve un diccionario con herramientas nuevas que se agregaran a inventario mas adelante.
+def cargaHerramientas(cantidad: int, inventario) -> dict:
+    paraAgregar = {}
     # Se hace un loop que se ejecuta una cantidad de veces ingresada previamente por el user
     for _ in range(cantidad):
         # Se valida y se ingresa la herramienta
         while True:
-            nombre = input("Ingrese el nombre de la herramienta: ").strip()
-            if nombre and nombre.replace(" ", "").isalpha():
+            try:
+                nombre = input("Ingrese el nombre de la herramienta: ").strip()
+
+                if not nombre:
+                    raise ValueError("Error: nombre vacio.")
+                if not nombre.replace(" ", "").isalpha():
+                    raise ValueError("Error: nombre invalido (solo letras).")
+                                
                 nombre = nombre.lower()
-                if nombre in inventario:
-                    print("Error: herramienta ya ingresada.")
-                else:
-                    break
-            else:
-                print("Error: nombre inválido (solo letras).")
+                
+                # Uso buscarHerramienta para verificar que la herramienta no este en inventario
+                if buscarHerramienta(inventario, nombre) is not None:
+                    raise ValueError("Error: nombre ya cargado previamente.")
+                
+                break
+            
+            except ValueError as e:
+                print(e)
+            
+            except Exception as e:
+                # Captura fallos generales
+                print(f"Se produjo un error inesperado: {e}")
+
         # Se valida y se ingresa el stock
         while True:
-            cant = input("Ingrese la cantidad para esa herramienta: ").strip()
-            if cant.isdigit() and int(cant) >= 0:
+            try:
+                # EL USUARIO INGRESA CANTIDAD DE STOCK
+                cant = input(f"Ingrese la cantidad de stock para {nombre}: ")
+
+                if not cant:
+                    raise ValueError("Error: cantidad vacio.")
+                
+                if not cant.isdigit():
+                    raise ValueError("Error: cantidad no es un numero.")
+                
+                if int(cant) <=0:
+                    raise ValueError("Error: cantidad es negativo o cero.")                          
+                        
                 cant = int(cant)
                 break
-            print("Error: ingrese una cantidad entera no negativa.")
+
+            except ValueError as e:
+                print(e)
+
+            except Exception as e:
+                # Captura fallos generales
+                print(f"Se produjo un error inesperado: {e}")
 
         # Agreaga el nombre de la herramienta con su cantidad, si la herramienta ya esta en inventario, le agrega mas valor al que ya tenga
-        inventario[nombre] = inventario.get(nombre, 0) + cant
+        paraAgregar[nombre] = paraAgregar.get(nombre, 0) + cant
 
-    return inventario
+    return paraAgregar
     
 def mostrarInventario(inventario):
     if len(inventario) == 0:
@@ -35,70 +67,211 @@ def mostrarInventario(inventario):
             print(f"Herramienta: {key}, existencias: {value}")
 
 def buscarHerramienta(inventario, nombre):
-    # Recorre el array que se le pase, busca el nombre y se encuentra devuelve el valor asociado al nombre
+    # Recorre el array que se le pase, busca el nombre y si encuentra devuelve el valor asociado al nombre
     for item in inventario:
         if nombre in item:
             return item[nombre]
     return None
+
+def mostrarAgotados(inventario):
+    mensaje = ""
+    for ele in inventario:
+        for key, value in ele.items():
+            if value == 0:
+                mensaje += f"Herramientas sin stock: {key}\n"
+    if mensaje == "":
+        mensaje = "No hay existencias agotadas.\n"
+
+    return mensaje
+
+
+# La funcion cargaNuevoProd recibe el inventario y devuelve un diccionario con el producto nuevo
+def cargaNuevoProd(inventario):
+    nueva = {}
+    while True:
+        try:
+            nombre = input("Ingrese el nombre de la herramienta: ").strip()
+            if not nombre:
+                raise ValueError("Error: nombre vacio.")
+            if not nombre.replace(" ", "").isalpha():
+                raise ValueError("Error: nombre invalido (solo letras).")
+                            
+            nombre = nombre.lower()
+            
+            # Uso buscarHerramienta para verificar que la herramienta no este en inventario
+            if buscarHerramienta(inventario, nombre) is not None:
+                raise ValueError("Error: nombre ya cargado previamente.")
+            
+            break
+        
+        except ValueError as e:
+            print(e)
+        
+        except Exception as e:
+            # Captura fallos generales
+            print(f"Se produjo un error inesperado: {e}")
+
+    # Se valida y se ingresa el stock
+    while True:
+        try:
+            # EL USUARIO INGRESA CANTIDAD DE HERRAMIENTAS A INGRESAR
+            cant = input(f"Ingrese la cantidad de stock para {nombre}: ")
+
+            if not cant:
+                raise ValueError("Error: cantidad vacio.")
+            
+            if not cant.isdigit():
+                raise ValueError("Error: cantidad no es un numero.")
+            
+            if int(cant) <=0:
+                raise ValueError("Error: cantidad es negativo o cero.")                          
+                    
+            cant = int(cant)
+            break
+
+        except ValueError as e:
+            print(e)
+
+        except Exception as e:
+            # Captura fallos generales
+            print(f"Se produjo un error inesperado: {e}")
+    
+    nueva[nombre] = cant
+
+    return nueva
+
+def actualizarStock():
+    pass
     
 def menu():
-    inventario = [{"martillo": 20}]
+    inventario = [{"martillo": 20}, {"soplete": 1}]
     running = True
     while running:
         print("Elige opcion:\n"
         "-1- Ingresar HERRAMIENTAS \n"
         "-2- Visualizar Inventario\n"
         "-3- Buscar Herramienta \n"
-        "-4- Ingresar EXISTENCIAS\n"
-        "-5- Reporte de Agotados\n"
-        "-6- Alta de Nuevo Producto\n"
-        "-7- Actualizacion de Stock\n"
-        "-8- Salir")
+        "-4- Reporte de Agotados\n"
+        "-5- Alta de Nuevo Producto\n"
+        "-6- Actualizacion de Stock\n"
+        "-7- Salir\n")
 
         menu = {1, 2, 3, 4, 5, 6, 7, 8}
         while True:
-            opcion = input("Opcion: ").strip()
-            if opcion.lstrip("+-").isdigit():
+            try:
+                opcion = input("Opcion: ").strip()
+                if not opcion:
+                    raise ValueError("Error: opcion vacia.")
+                if not opcion.isdigit():
+                    raise ValueError("Error: opcion no es un numero.")
+                if int(opcion) not in menu:
+                    raise ValueError("Error: opcion no esta en el menu.")
                 opcion = int(opcion)
-                if opcion in menu:
-                    break
-                print("Error: opcion fuera de rango.")
-            else:
-                print("Error: ingrese un número válido.")
+                break
+            except ValueError as e:
+                print(e)
+            except Exception as e:
+                # Captura fallos generales
+                print(f"Se produjo un error inesperado en el MENU: {e}")
 
         match opcion:
             #CARGA INICIAL DE HERRAMIENTAS
             case 1:
-                # EL USUARIO INGRESA CANTIDAD DE HERRAMIENTAS A INGRESAR
-                cantidad = input("Ingrese la cantidad de herramientas a ingresar: ")
-                while not cantidad.isdigit() or int(cantidad) <0:
-                    print("Error: ingrese un número entero positivo.")
-                    cantidad = input("Ingrese la cantidad de herramientas a ingresar: ")
-                cantidad = int(cantidad)
+                try:
+                    while True:
+                        try:
+                            # EL USUARIO INGRESA CANTIDAD DE HERRAMIENTAS A INGRESAR
+                            cantidad = input("Ingrese la cantidad de herramientas a ingresar: ")
 
-                # Llamo a cargaHerramientas, guardo el diccionario que devuelve en la variable herramientas
-                herramientas = cargaHerramientas(cantidad)
-                # Recorro las duplas de clave - valor y las agrego a la lista inventario
-                for nombre, cant in herramientas.items():
-                    inventario.append({nombre: cant})
+                            if not cantidad:
+                                raise ValueError("Error: cantidad vacio.")
+                            
+                            if not cantidad.isdigit():
+                                raise ValueError("Error: cantidad no es un numero.")
+                            
+                            if int(cantidad) <=0:
+                                raise ValueError("Error: cantidad es negativo o cero.")                          
+                                    
+                            cantidad = int(cantidad)
+                            break
+
+                        except ValueError as e:
+                            print(e)
+
+                    # Llamo a cargaHerramientas, guardo el diccionario que devuelve en la variable herramientas
+                    herramientas = cargaHerramientas(cantidad, inventario)
+                    print(f"Que es esto: {herramientas}")
+
+                    # Recorro las duplas de clave - valor y las agrego a la lista inventario
+                    for nombre, cant in herramientas.items():
+                        inventario.append({nombre: cant})
+
+                except Exception as e:
+                # Captura fallos generales
+                    print(f"Se produjo un error inesperado en OPCION 1: {e}")
 
             case 2:
-            # Por ahora print a la lista de diccionarios
-                mostrarInventario(inventario)
+                try:
+                # Por ahora print a la lista de diccionarios
+                    mostrarInventario(inventario)
+                except Exception as e:
+                # Captura fallos generales
+                    print(f"Se produjo un error inesperado en OPCION 2: {e}")
 
             case 3:
-                # Se pide ingresar herramienta a buscar
-                while True:
-                    nombre = input("Ingrese el nombre de la herramienta: ").strip()
-                    if nombre and nombre.replace(" ", "").isalpha():
-                        nombre = nombre.lower()
-                        break
+                try:
+                    # Se pide ingresar herramienta a buscar
+                    while True:
+                        try:
+                            nombre = input("Ingrese el nombre de la herramienta: ").strip()
+                            if not nombre:
+                                raise ValueError("Error: nombre vacio")
+                            if not nombre.replace(" ", "").isalpha():
+                                raise ValueError("Error: nombre invalido (solo letras).")
+                                
+                            nombre = nombre.lower()
+                            break
+
+                        except ValueError as e:
+                            print(e)
+
+                    # Se llama funcion de busqueda, si da None imprime mensaje, sino imprime stock
+                    stock = buscarHerramienta(inventario, nombre)
+
+                    if stock is None:
+                        print("La herramienta no se encuentra en el inventario.")
                     else:
-                        print("Error: nombre inválido (solo letras).")
-                # Se llama funcion de busqueda, si da None imprime mensaje, sino imprime stock
-                stock = buscarHerramienta(inventario, nombre)
-                if stock is None:
-                    print("La herramienta no se encuentra en el inventario.")
-                else:
-                    print(f"Stock de {nombre}: {stock}")
+                        print(f"Stock de {nombre}: {stock}")
+
+                except Exception as e:
+                # Captura fallos generales
+                    print(f"Se produjo un error inesperado en OPCION 3: {e}")
+            
+            case 4:
+                try:
+                    mensaje = mostrarAgotados(inventario)
+                    print(mensaje)
+
+                except Exception as e:
+                # Captura fallos generales
+                    print(f"Se produjo un error inesperado en OPCION 4: {e}")
+
+            case 5:
+                try:
+                    prod = cargaNuevoProd(inventario)
+                    if prod != None:
+                        inventario.append(prod)
+                except Exception as e:
+                # Captura fallos generales
+                    print(f"Se produjo un error inesperado en OPCION 5: {e}")
+            
+            case 6:
+                try:
+                    pass
+                except Exception as e:
+                    print(f"Se produjo un error inesperado en OPCION 6: {e}")
+            
+            case 7:
+                break
+
 menu()
