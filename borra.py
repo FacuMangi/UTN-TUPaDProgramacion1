@@ -31,9 +31,9 @@ def addTool(inventario):
 
 inventario = [{"herramienta": "martillo", "cantidad": 20}, {"herramienta": "soplete", "cantidad": 1},
               {"herramienta": "destornillador", "cantidad": 0}]
-#addTool(inventario)
+addTool(inventario)
 
-#print(inventario)
+print(inventario)
 
 def mostrarInventario(inventario):
     if len(inventario) == 0:
@@ -128,6 +128,6 @@ def actualizarStock(inventario):
     except ValueError as e:
         print(e)
 
-print(inventario)
+#print(inventario)
 
-actualizarStock(inventario)
+#actualizarStock(inventario)

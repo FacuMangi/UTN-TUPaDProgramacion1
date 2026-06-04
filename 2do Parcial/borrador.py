@@ -36,8 +36,9 @@ def cargaHerramientas(inventario):
                 nombre = nombre.lower()
                 
                 # Uso buscarHerramienta para verificar que la herramienta no este en inventario
-                if buscarHerramienta(inventario, nombre) is not None:
-                    raise ValueError("Error: nombre ya cargado previamente.")
+                for ele in inventario:
+                    if ele["herramienta"] == nombre:
+                        raise ValueError("Error: nombre ya cargado previamente.")
                 break
             
             except ValueError as e:
@@ -65,10 +66,10 @@ def cargaHerramientas(inventario):
                 print(e)
 
             # Agreaga el nombre de la herramienta con su cantidad, si la herramienta ya esta en inventario, le agrega mas valor al que ya tenga
-            paraAgregar["herramienta"] = nombre
-            paraAgregar["cantidad"] = cant
+        paraAgregar["herramienta"] = nombre
+        paraAgregar["cantidad"] = cant
 
-            inventario.append(paraAgregar)
+        inventario.append(paraAgregar)
     
 def mostrarInventario(inventario):
     if len(inventario) == 0:
@@ -126,8 +127,9 @@ def cargaNuevoProd(inventario):
             nombre = nombre.lower()
             
             # Uso buscarHerramienta para verificar que la herramienta no este en inventario
-            if buscarHerramienta(inventario, nombre) is not None:
-                raise ValueError("Error: nombre ya cargado previamente.")
+            for ele in inventario:
+                if ele["herramienta"] == nombre:
+                    raise ValueError("Error: nombre ya cargado previamente.")
             break
         
         except ValueError as e:
@@ -155,10 +157,10 @@ def cargaNuevoProd(inventario):
             print(e)
 
         # Agreaga el nombre de la herramienta con su cantidad, si la herramienta ya esta en inventario, le agrega mas valor al que ya tenga
-        paraAgregar["herramienta"] = nombre
-        paraAgregar["cantidad"] = cant
+    paraAgregar["herramienta"] = nombre
+    paraAgregar["cantidad"] = cant
 
-        inventario.append(paraAgregar)
+    inventario.append(paraAgregar)
 
 def actualizarStock(inventario):
     try:
@@ -250,13 +252,7 @@ def menu():
             #CARGA INICIAL DE HERRAMIENTAS
             case 1:
                 try:
-                    # Llamo a cargaHerramientas, guardo el diccionario que devuelve en la variable herramientas
-                    herramientas = cargaHerramientas(cantidad, inventario)
-
-                    # Recorro las duplas de clave - valor y las agrego a la lista inventario
-                    for nombre, cant in herramientas.items():
-                        inventario.append({nombre: cant})
-
+                    cargaHerramientas(inventario)
                 except Exception as e:
                 # Captura fallos generales
                     print(f"Se produjo un error inesperado en OPCION 1: {e}")
@@ -271,47 +267,21 @@ def menu():
 
             case 3:
                 try:
-                    # Se pide ingresar herramienta a buscar
-                    while True:
-                        try:
-                            nombre = input("Ingrese el nombre de la herramienta: ").strip()
-                            if not nombre:
-                                raise ValueError("Error: nombre vacio")
-                            if not nombre.replace(" ", "").isalpha():
-                                raise ValueError("Error: nombre invalido (solo letras).")
-                                
-                            nombre = nombre.lower()
-                            break
-
-                        except ValueError as e:
-                            print(e)
-
-                    # Se llama funcion de busqueda, si da None imprime mensaje, sino imprime stock
-                    stock = buscarHerramienta(inventario, nombre)
-
-                    if stock is None:
-                        print("La herramienta no se encuentra en el inventario.")
-                    else:
-                        print(f"Stock de {nombre}: {stock}")
-
+                    buscarHerramienta(inventario)
                 except Exception as e:
                 # Captura fallos generales
                     print(f"Se produjo un error inesperado en OPCION 3: {e}")
             
             case 4:
                 try:
-                    mensaje = mostrarAgotados(inventario)
-                    print(mensaje)
-
+                    mostrarAgotados(inventario)
                 except Exception as e:
                 # Captura fallos generales
                     print(f"Se produjo un error inesperado en OPCION 4: {e}")
 
             case 5:
                 try:
-                    prod = cargaNuevoProd(inventario)
-                    if prod != None:
-                        inventario.append(prod)
+                    cargaNuevoProd(inventario)
                 except Exception as e:
                 # Captura fallos generales
                     print(f"Se produjo un error inesperado en OPCION 5: {e}")
