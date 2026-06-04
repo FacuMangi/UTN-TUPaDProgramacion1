@@ -3,14 +3,12 @@ def cargaHerramientas(inventario):
     while True:
         try:
             # EL USUARIO INGRESA CANTIDAD DE HERRAMIENTAS A INGRESAR
-            cantidad = input("Ingrese la cantidad de herramientas a ingresar: ")
+            cantidad = input("Ingrese la cantidad de herramientas a ingresar: ").strip()
 
             if not cantidad:
-                raise ValueError("Error: cantidad vacio.")
-            
+                raise ValueError("Error: cantidad vacio.")            
             if not cantidad.isdigit():
-                raise ValueError("Error: cantidad no es un numero.")
-            
+                raise ValueError("Error: cantidad no es un numero.")            
             if int(cantidad) <=0:
                 raise ValueError("Error: cantidad es negativo o cero.")                          
                     
@@ -18,7 +16,7 @@ def cargaHerramientas(inventario):
             break
 
         except ValueError as e:
-            print(e)
+            print(f"{e}\n")
 
     # Se hace un loop que se ejecuta una cantidad de veces ingresada previamente por el user
     for _ in range(cantidad):
@@ -42,13 +40,13 @@ def cargaHerramientas(inventario):
                 break
             
             except ValueError as e:
-                print(e)
+                print(f"{e}\n")
 
         # Se valida y se ingresa el stock
         while True:
             try:
                 # EL USUARIO INGRESA CANTIDAD DE STOCK
-                cant = input(f"Ingrese la cantidad de stock para {nombre}: ")
+                cant = input(f'Ingrese la cantidad de stock para "{nombre}": ')
 
                 if not cant:
                     raise ValueError("Error: cantidad vacio.")
@@ -63,41 +61,48 @@ def cargaHerramientas(inventario):
                 break
 
             except ValueError as e:
-                print(e)
+                print(f"{e}\n")
 
             # Agreaga el nombre de la herramienta con su cantidad, si la herramienta ya esta en inventario, le agrega mas valor al que ya tenga
         paraAgregar["herramienta"] = nombre
         paraAgregar["cantidad"] = cant
 
         inventario.append(paraAgregar)
+    print("\n")
     
 def mostrarInventario(inventario):
     if len(inventario) == 0:
         print("No hay herramientas cargadas.")
-    print(f"=== INVENTARIO ===")
-    for ele in inventario:
-        for key, value in ele.items():
-            print(f"{key}: {value}")
+    else:
+        print(f"=== INVENTARIO ===")
+        for ele in inventario:
+            for key, value in ele.items():
+                print(f"{key}: {value}")
+    print("\n")
 
 # Funcion que recorre el array que se le pase, busca el nombre en el key herramienta y si encuentra un match devuelve mensaje con herramienta y cantidad
 def buscarHerramienta(inventario):
-    nombre = input("Ingresar herramienta para buscar: ")
-    nombre = nombre.strip().lower()
-    mensaje = ""
-    for ele in inventario:
-        if ele["herramienta"] == nombre:
-            mensaje = f'Herramienta "{ele["herramienta"]}" tiene {ele["cantidad"]} unidades.'
-    if mensaje == "":
-        print(f'No se encontro la herramienta "{nombre}".')
-    else:
-        print(mensaje)
-# Funcion que devuelve la herramienta con su posicion en el inventario
-def encontrar_item(inventario, nombre):
-    nombre = nombre.strip().lower()
-    for i, item in enumerate(inventario):
-        if nombre in item:
-            return i, item
-    return None, None
+    try:
+        nombre = input("Ingresar herramienta para buscar: ").strip()
+
+        if not nombre:
+            raise ValueError("Error: nombre vacio.")
+        if not nombre.replace(" ", "").isalpha():
+            raise ValueError("Error: nombre invalido (solo letras).")
+        
+        nombre = nombre.lower()
+        
+        mensaje = ""
+        for ele in inventario:
+            if ele["herramienta"] == nombre:
+                mensaje = f'Herramienta "{ele["herramienta"]}" tiene {ele["cantidad"]} unidades.\n'
+        if mensaje == "":
+            print(f'No se encontro la herramienta "{nombre}".\n')
+        else:
+            print(mensaje)
+
+    except ValueError as e:
+        print(f"{e}\n")
 
 def mostrarAgotados(inventario):
     contador = 0
@@ -133,7 +138,7 @@ def cargaNuevoProd(inventario):
             break
         
         except ValueError as e:
-            print(e)
+            print(f"{e}\n")
 
     # Se valida y se ingresa el stock
     while True:
@@ -154,19 +159,24 @@ def cargaNuevoProd(inventario):
             break
 
         except ValueError as e:
-            print(e)
+            print(f"{e}\n")
 
         # Agreaga el nombre de la herramienta con su cantidad, si la herramienta ya esta en inventario, le agrega mas valor al que ya tenga
-    paraAgregar["herramienta"] = nombre
+    paraAgregar["herramienta"] = nombre 
     paraAgregar["cantidad"] = cant
 
     inventario.append(paraAgregar)
+    print("\n")
 
 def actualizarStock(inventario):
     try:
         nombre = input("Ingrese el nombre de la herramienta: ").strip()
-        if not nombre.isalpha():
-            raise ValueError("Error: solo valores alfabeticos.")
+        if not nombre:
+            raise ValueError("Error: nombre vacio.")
+        if not nombre.replace(" ", "").isalpha():
+            raise ValueError("Error: nombre invalido (solo letras).")
+        
+        nombre = nombre.lower()
 
         while True:
             print("-1- Agregar stock\n"
@@ -191,7 +201,7 @@ def actualizarStock(inventario):
                     raise ValueError("Error: cantidad invalida.")
                 nuevoStock = int(nuevoStock)
                 if nuevoStock <= 0:
-                    raise ValueError("Error: cantidad debe ser > 0.")
+                    raise ValueError("Error: cantidad debe ser mayor que 0.")
                 
                 for ele in inventario:
                     if ele["herramienta"] == nombre:
@@ -204,7 +214,7 @@ def actualizarStock(inventario):
                     raise ValueError("Error: cantidad invalida.")
                 nuevoStock = int(nuevoStock)
                 if nuevoStock <= 0:
-                    raise ValueError("Error: cantidad debe ser > 0.")
+                    raise ValueError("Error: cantidad debe ser mayor que 0.")
                 
                 for ele in inventario:
                     if ele["herramienta"] == nombre:
@@ -213,9 +223,10 @@ def actualizarStock(inventario):
                             print(f"Stock actualizado para {nombre} quedando con un total de: {ele["cantidad"]}")
                         else:
                             raise ValueError("Error: no hay suficiente stock.")
+        print("\n")
 
     except ValueError as e:
-        print(e)
+        print(f"{e}\n")
     
 def menu():
     inventario = [{"herramienta": "martillo", "cantidad": 20}, {"herramienta": "soplete", "cantidad": 0}]
@@ -243,7 +254,7 @@ def menu():
                 opcion = int(opcion)
                 break
             except ValueError as e:
-                print(e)
+                print(f"{e}\n")
             except Exception as e:
                 # Captura fallos generales
                 print(f"Se produjo un error inesperado en el MENU: {e}")
