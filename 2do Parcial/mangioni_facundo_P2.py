@@ -253,7 +253,7 @@ def menu():
         "-6- Actualizacion de Stock\n"
         "-7- Salir\n")
 
-        menu = {1, 2, 3, 4, 5, 6, 7, 8}
+        menu = {1, 2, 3, 4, 5, 6, 7}
         while True:
             try:
                 opcion = input("Opcion: ").strip()
