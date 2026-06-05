@@ -184,6 +184,14 @@ def actualizarStock(inventario):
         
         nombre = nombre.lower()
 
+        # Checkeo de que exista la herramienta en inventario
+        encontrado = False
+        for ele in inventario:
+            if ele["herramienta"] == nombre:                    
+                encontrado = True
+        if encontrado == False:
+            raise ValueError(f'Error: no hay una herramienta con nombre "{nombre}".')
+
         # Pequenio menu que presenta las opciones. El input aqui tambien se valida.
         while True:
             print("-1- Agregar stock\n"
